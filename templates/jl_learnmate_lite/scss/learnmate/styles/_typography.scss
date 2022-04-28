@@ -1,0 +1,33 @@
+// Font Import
+@include import-font($font-family-default);
+@include import-font($font-family-title);
+
+body {
+	font-family: get-font-family($font-family-default);
+	font-weight: $font-weight-regular;
+}
+
+h1, h2, h3, h4, h5 {
+	font-family: get-font-family($font-family-title);
+	color: $base-heading-color;
+}
+
+h1, h2, h3, h4 {
+	font-weight: $font-weight-bold;
+}
+h5, h6 {
+	font-weight: $font-weight-medium;
+}
+
+bold, strong {
+	font-weight: $font-weight-bold;
+}
+
+// Blockquote
+blockquote {
+	margin: 0 0 20px 0;
+	padding-left: 0;
+	cite {
+		display: inline-block;
+	}
+}

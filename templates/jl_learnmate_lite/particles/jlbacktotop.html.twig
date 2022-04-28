@@ -1,0 +1,50 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block stylesheets %}
+<style>
+{% if particle.background %}
+.back-to-top { background-color: {{ particle.background }}; }
+{% endif %}
+{% if particle.color %}
+.back-to-top .jl-icon, .back-to-top .fa { color: {{ particle.color }}; }
+{% endif %}
+.back-to-top:hover { background-color: {{ particle.backgroundhover }}; }
+{% if particle.icon_color %}
+.back-to-top:hover .jl-icon, .back-to-top:hover .fa { color: {{ particle.icon_color }}; }
+{% endif %}
+{% if gantry.page.direction == 'rtl' %}
+.back-to-top {left: 20px;}
+{% else %}
+.back-to-top {right: 20px;}
+{% endif %}
+</style>
+{% endblock %}
+
+{% pageblock bottom %}
+<a class="back-to-top jl-icon-button"{% if particle.sec_id %} href="{{ particle.sec_id|e }}"{% endif %} title="{{ particle.title_label|raw|default('Back to top')}}" jl-scroll>
+    {% if particle.icon %}<span class="{{ particle.icon|e }}" aria-hidden="true"></span>{% else %}<span jl-totop></span> {% endif %}
+</a>
+{% endpageblock %}
+
+{% block javascript %}
+{% do gantry.load('jquery') %}
+<script>
+jQuery(function($) {
+  if ($('.back-to-top').length) {
+    var scrollTrigger = 0, // px
+    backToTop = function() {
+      var scrollTop = $(window).scrollTop();
+      if (scrollTop > scrollTrigger) {
+        $('.back-to-top').removeClass('backHide');
+      } else {
+        $('.back-to-top').addClass('backHide');
+      }
+    };
+    backToTop();
+    $(window).on('scroll', function() {
+      backToTop();
+    });
+  }
+});
+</script>
+{% endblock %}

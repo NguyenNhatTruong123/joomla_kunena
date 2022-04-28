@@ -1,0 +1,17 @@
+#g-sidebar {
+    background: $main-background;
+    color: $main-text-color;
+    .jl-h4 {
+        font-size: 22px;
+    }
+    .moduletable {
+        margin-bottom: $content-padding;
+    }
+}
+
+@media print {
+    #g-sidebar {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}

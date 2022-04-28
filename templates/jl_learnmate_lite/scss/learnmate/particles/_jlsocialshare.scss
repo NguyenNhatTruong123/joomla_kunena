@@ -1,0 +1,76 @@
+//Social Share Icon Color (Optional)
+.tm-custom-icon {
+    .tm-share-icon a {
+      -webkit-transition: all 0.5s;
+      -o-transition: all 0.5s;
+      transition: all 0.5s;
+      color: #ffffff;
+  
+      &:hover {
+        -webkit-filter: saturate(1.2) brightness(1.2);
+        filter: saturate(1.2) brightness(1.2);
+        color: #fff;
+      }
+    }
+  
+    .tm-share-icon .twitter {
+      background-color: #55acee;
+    }
+  
+    .tm-share-icon .facebook {
+      background-color: #3b5999;
+    }
+  
+    .tm-share-icon .linkedin {
+      background-color: #0077B5;
+    }
+  
+    .tm-share-icon .whatsapp {
+      background-color: #25D366;
+    }
+  
+    .tm-share-icon .telegram {
+      background-color: #2ca5e0;
+    }
+  
+    .tm-share-icon .mail {
+      background-color: #ea4335;
+    }
+  
+    .tm-share-icon .digg {
+      background-color: #005be2;
+    }
+  
+    .tm-share-icon .pinterest {
+      background-color: #bd081c;
+    }
+  
+    .tm-share-icon .tumblr {
+      background-color: #eb4924;
+    }
+  
+    .tm-share-icon .reddit {
+      background-color: #ff4500;
+    }
+  
+    .tm-share-icon .vk {
+      background-color: #4c75a3;
+    }
+  
+    .tm-share-icon .xing {
+      background-color: #026466;
+    }
+  
+    .tm-share-icon .weibo {
+      background-color: #df2029;
+    }
+  
+    .tm-share-icon .renren {
+      background-color: #005EAC;
+    }
+  
+    .tm-share-icon .skype {
+      background-color: #00AFF0;
+    }
+  }
+  

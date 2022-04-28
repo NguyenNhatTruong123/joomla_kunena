@@ -1,0 +1,681 @@
+{% try %}
+{% set menu = gantry.menu.instance(particle) %}
+{% catch %}
+<div class="alert alert-error">{{ e.getMessage }}</div>
+{% endtry %}
+
+{% if particle.sticky or particle.m_sticky %}
+{% set sticky_navbar %}html {height: auto;}{% endset %}
+{% do gantry.document.addInlineStyle(sticky_navbar, 0) %}
+{% endif %}
+
+{% set inline_css %}
+{% spaceless %}
+{% if particle.main_nav_margin and particle.navbar_style is empty %}#g-navigation .g-main-nav {margin: 0;}{% endif %}
+{% if particle.navbar_height %}
+#{{ id }} .jl-navbar-item, #{{ id }} .jl-navbar-nav>li>a,#{{ id }} .jl-navbar-nav>li>div.g-menu-item-container,#{{ id }} .jl-navbar-toggle {min-height: {{ particle.navbar_height|e }}}
+{% endif %}
+{% if particle.navbar_style %}
+{% if particle.navbar_fontsize %}
+#{{ id }} .jl-navbar-item, #{{ id }} .jl-navbar-nav>li>a, #{{ id }} .jl-navbar-toggle { {% if particle.navbar_fontsize %}font-size: {{ particle.navbar_fontsize }}; {% endif %} }
+{% endif %}
+{% if particle.navbar_color %}
+#{{ id }} .jl-navbar-nav>li>a {color: {{ particle.navbar_color }};}
+{% endif %}
+{% if particle.navbar_hover_color %}
+#{{ id }} .jl-navbar-nav>li:hover>a, #{{ id }} .jl-navbar-nav>li>a.jl-open, #{{ id }} .jl-navbar-nav>li>a:focus {color: {{ particle.navbar_hover_color }};}
+{% endif %}
+{% if particle.navbar_active_color %}
+#{{ id }} .jl-navbar-nav>li>a:active,
+#{{ id }} .jl-navbar-nav>li.jl-active>a { color: {{ particle.navbar_active_color }}; }
+{% endif %}
+{% if particle.navbar_padding_top or particle.navbar_padding_bottom %}
+#{{ id }} .jl-navbar-container { {% if particle.navbar_padding_top %}padding-top: {{ particle.navbar_padding_top }};{% endif %}{% if particle.navbar_padding_bottom %}padding-bottom: {{ particle.navbar_padding_bottom }};{% endif %} }
+{% endif %}
+{% if particle.dropdown_bg or particle.dropdown_color or particle.dropdown_border_radius or particle.dropdown_padding %}
+#{{ id }} .jl-navbar-dropdown { 
+    {% if particle.dropdown_bg %}background: {{ particle.dropdown_bg }};{% endif %}
+    {% if particle.dropdown_color %}color: {{ particle.dropdown_color }};{% endif %}
+    {% if particle.dropdown_border_radius %}border-radius: {{ particle.dropdown_border_radius }};{% endif %}
+    {% if particle.dropdown_padding %}padding: {{ particle.dropdown_padding }};{% endif %}
+}
+{% endif %}
+{% if particle.dropdown_nav_padding %}
+#{{ id }} .jl-nav>li>a { padding: {{ particle.dropdown_nav_padding|e }}; }
+{% endif %}
+{% if particle.dropdown_nav_color %}
+#{{ id }} .jl-navbar-dropdown-nav>li>a { {% if particle.dropdown_nav_color %}color: {{ particle.dropdown_nav_color|e }};{% endif %} }
+{% endif %}
+{% if particle.dropdown_navbar_fontsize %}#{{ id }} .jl-navbar-dropdown-nav>li>a { font-size: {{ particle.dropdown_navbar_fontsize }};} {% endif %} 
+{% if particle.dropdown_navbar_hover_color %}
+#{{ id }} .jl-navbar-dropdown-nav>li>a:focus,
+#{{ id }} .jl-navbar-dropdown-nav>li>a:hover{ color: {{ particle.dropdown_navbar_hover_color|e }}; }
+{% endif %}
+{% if particle.dropdown_navbar_active_color %}
+#{{ id }} .jl-navbar-dropdown-nav>li.jl-active>a{ color: {{ particle.dropdown_navbar_active_color|e }};}
+{% endif %}
+{% if particle.dropdown_divider %}
+#{{ id }} .jl-navbar-dropdown-grid>:not(.jl-first-column)::before { border-left: 1px solid {{ particle.dropdown_divider }};}
+{% endif %} 
+{% if particle.dropdown_margin %}#{{ id }} [class*=jl-dropdown-bottom] { margin-top: {{ particle.dropdown_margin }}; }{% endif %}
+{% else %}
+{% if particle.navbar_fontsize %}
+#{{ id }} .g-main-nav .jl-navbar-nav > li > .g-menu-item-container, #{{ id }} .jl-navbar-toggle { {% if particle.navbar_fontsize %}font-size: {{ particle.navbar_fontsize }}; {% endif %} }
+{% endif %}
+{% if particle.navbar_color %}
+#{{ id }} .g-main-nav .g-toplevel>li>.g-menu-item-container,
+#{{ id }} .jl-logo { color: {{ particle.navbar_color }}; }
+{% endif %}
+{% if particle.navbar_hover_color %}
+#{{ id }} .g-main-nav .g-toplevel>li:hover>.g-menu-item-container,
+#{{ id }} .g-main-nav .g-toplevel>li:hover>.g-menu-item-container {color: {{ particle.navbar_hover_color }};}
+{% endif %}
+{% if particle.navbar_active_color %}
+#{{ id }} .g-main-nav .g-toplevel>li.active>.g-menu-item-container { color: {{ particle.navbar_active_color }}; }
+#{{ id }} .g-main-nav .g-toplevel>li.active>.g-separator { color: {{ particle.navbar_active_color }}; }
+{% if particle.navbar_style is empty %}
+#{{ id }} .g-main-nav .g-toplevel > li:not(.g-menu-item-type-particle):not(.g-menu-item-type-module).active > .g-menu-item-container {
+    color: {{ particle.navbar_active_color }};
+}
+{% endif %}
+{% endif %}
+{% if particle.dropdown_bg or particle.dropdown_color or particle.dropdown_border_radius or particle.dropdown_padding %}
+#{{ id }} .g-main-nav .g-dropdown { 
+{% if particle.dropdown_bg %}
+    background: {{ particle.dropdown_bg }};
+{% endif %}
+{% if particle.dropdown_color %}
+    color: {{ particle.dropdown_color }};
+{% endif %}
+{% if particle.dropdown_border_radius %}
+    border-radius: {{ particle.dropdown_border_radius }};
+{% endif %}
+{% if particle.dropdown_padding %}
+    padding: {{ particle.dropdown_padding }};
+{% endif %}
+ }
+{% endif %}
+{% if particle.dropdown_nav_color %}
+#{{ id }} .g-main-nav .g-sublevel > li > .g-menu-item-container { {% if particle.dropdown_nav_color %}color: {{ particle.dropdown_nav_color|e }};{% endif %} }
+{% endif %}
+{% if particle.dropdown_navbar_fontsize %}{{ id }} .g-main-nav .g-sublevel > li > .g-menu-item-container { font-size: {{ particle.dropdown_navbar_fontsize }};} {% endif %} 
+{% if particle.dropdown_navbar_hover_color %}
+#{{ id }} .g-main-nav .g-sublevel > li > .g-menu-item-container:focus,
+#{{ id }} .g-main-nav .g-sublevel > li > .g-menu-item-container:hover { color: {{ particle.dropdown_navbar_hover_color|e }}; }
+{% endif %}
+{% if particle.dropdown_navbar_active_color %}
+#{{ id }} .g-main-nav .g-sublevel > li:not(.g-menu-item-type-particle):not(.g-menu-item-type-module).active .g-menu-item-container { color: {{ particle.dropdown_navbar_active_color|e }};}
+{% endif %}
+{% if particle.dropdown_navbar_fontsize %}
+#{{ id }} .g-main-nav .g-sublevel > li > .g-menu-item-container {font-size: {{ particle.dropdown_navbar_fontsize|e }};}
+{% endif %}
+{% if particle.dropdown_nav_padding %}
+#{{ id }} .g-main-nav .g-sublevel > li > .g-menu-item-container { padding: {{ particle.dropdown_nav_padding|e }}; }
+{% endif %}
+{% endif %}
+{% if particle.container_maxwidth == 'custom' and particle.ct_container_width is not empty %}
+#{{ id }}-particle .tm-header .g-container {
+    max-width: {{ particle.ct_container_width|e }};
+}
+{% endif %}
+{% if particle.nav_bg_color %}
+#{{ id }}-particle .jl-navbar-container:not(.jl-navbar-transparent) {
+    background-color: {{ particle.nav_bg_color }};
+}
+{% endif %}
+{% if particle.logo_color %}#{{ id }}-particle .jl-logo { color: {{ particle.logo_color }};}{% endif %}
+{% if particle.mobile_text_color %}#{{ id }} .tm-header-mobile .jl-logo { color: {{ particle.mobile_text_color }};}{% endif %}
+{% endspaceless %}
+{% endset %}
+{% do gantry.document.addInlineStyle(inline_css, 0) %}
+
+{% set menu_toggle %}
+<a class="jl-navbar-toggle mobile-toggle" href="#mobile-{{ id }}" jl-toggle="animation: true">
+{% if particle.menu_text and particle.mobile_menu_toggle == 'right' %}<span class="jl-margin-small-right">{{particle.menu_text}}</span>{% endif %}
+<div jl-navbar-toggle-icon class="jl-icon jl-navbar-toggle-icon"></div>
+{% if particle.menu_text and particle.mobile_menu_toggle == 'left' %}<span class="jl-margin-small-left">{{particle.menu_text}}</span>{% endif %}
+</a>
+{% endset %}
+
+{# Set Social Items #}
+{% set social_icons %}
+<ul class="jl-flex-inline jl-flex-middle jl-flex-nowrap{% if particle.social_icon_gap %} jl-grid-{{particle.social_icon_gap|e}}{% endif %}{% if particle.social_inverse %} jl-{{ particle.social_inverse }}{% endif %}" jl-grid>
+{% for social_item in particle.social_items %}
+<li>
+<a class="tm-icon{{ particle.sc_icon_button ? ' jl-icon-button' : '' }}" href="{{ social_item.social_link|e }}" title="{{ social_item.social_text|e }}" target="{{ particle.sc_link_target|default('_blank')|e }}"><i class="{{social_item.social_icon}}" aria-hidden="true"></i></a>
+</li>
+{% endfor %}
+</ul>
+{% endset %}
+
+
+{% set theme_container = particle.container_maxwidth == 'custom' ? 'g-container' : 'jl-container' ~ (particle.container_maxwidth in ['small', 'large', 'xlarge', 'expand'] ? ' jl-container-' ~ particle.container_maxwidth|e) %}
+
+{# Set Search #}
+{% set navbar_search %}
+{% if particle.search_style == 'default' %}
+  {% if not joomla.checkVersion('4.0') %}
+    <form class="jl-search jl-search-default" action="{{ joomla.route('index.php') }}" method="post">
+      <span jl-search-icon class="{{ particle.icon_flip ? 'jl-search-icon-flip' : 'jl-search-icon' }}"></span>
+      <input class="jl-search-input" type="search" name="searchword" placeholder="{{ particle.placeholder|default('Search...') }}" value="">
+      <input type="hidden" name="task" value="search" />
+      <input type="hidden" name="option" value="com_search" />
+      <input type="hidden" name="Itemid" value="{{ gantry.page.itemid|int }}" />
+    </form>
+  {% else %}
+    <form class="jl-search jl-search-default" action="{{ joomla.route('index.php?option=com_finder&view=search') }}" method="get" role="search">
+      <span jl-search-icon class="{{ particle.icon_flip ? 'jl-search-icon-flip' : 'jl-search-icon' }}"></span>
+      <input id="{{ id }}" class="jl-search-input" type="search" name="q" placeholder="{{ particle.placeholder|default('Search...') }}" value="">
+      <input type="hidden" name="option" value="com_finder" />
+      <input type="hidden" name="Itemid" value="{{ gantry.page.itemid|int }}" />
+    </form>  
+  {% endif %}
+{% else %}
+<a href="#js-search-{{id}}" class="jl-search-toggle" jl-search-icon jl-toggle></a>
+<div id="js-search-{{id}}" class="jl-modal-full jl-modal" jl-modal>
+  <div class="jl-modal-dialog jl-flex jl-flex-center jl-flex-middle" jl-height-viewport>
+    <button class="jl-modal-close-full jl-close-large" type="button" jl-close></button>
+    {% if not joomla.checkVersion('4.0') %}
+        <form class="jl-search jl-search-large" action="{{ joomla.route('index.php') }}" method="post">
+        <input class="jl-search-input jl-text-center" type="search" name="searchword" placeholder="{{ particle.placeholder|default('Search...') }}" value="" autofocus>
+        <input type="hidden" name="task" value="search" />
+        <input type="hidden" name="option" value="com_search" />
+        <input type="hidden" name="Itemid" value="{{ gantry.page.itemid|int }}" />
+        </form>
+    {% else %}
+        <form class="jl-search jl-search-large" action="{{ joomla.route('index.php?option=com_finder&view=search') }}" method="get" role="search">
+        <input id="{{ id }}" class="jl-search-input jl-text-center" type="search" name="q" placeholder="{{ particle.placeholder|default('Search...') }}" value="" autofocus>
+        <input type="hidden" name="option" value="com_finder" />
+        <input type="hidden" name="Itemid" value="{{ gantry.page.itemid|int }}" />
+        </form>  
+    {% endif %}
+  </div>
+</div>
+{% endif %}
+{% endset %}
+
+{% macro getCustomWidth(item, menu, mode, dropdown_type, start_level) -%}
+    {%- if (item.width|default('auto') != 'auto') and not (dropdown_type == 'fullwidth' and item.level > start_level) -%}
+        {%- if mode == 'item' %} style="position: relative;"
+        {%- elseif mode == 'submenu' %} style="width:{{ item.width }};" data-g-item-width="{{ item.width }}"
+        {%- endif %}
+    {%- endif %}
+{%- endmacro %}
+
+{% macro displayParticle(item, context) %}
+    {% try %}
+    {% set in_particle = (context.in_particle ?? 0) + 1 %}
+    {% if in_particle > 5 %}
+        {% throw 500 'Particle loop detected' %}
+    {% endif %}
+
+    {% set context = context|merge({ particle: item.options.particle, in_particle: in_particle}) %}
+    {% set classes = item.options.block.class %}
+    <div class="menu-item-particle{{ classes ? ' ' ~ classes }}">
+        {% include ['particles/' ~ item.particle ~ '.html.twig', '@particles/' ~ item.particle ~ '.html.twig']
+        ignore missing with context only %}
+    </div>
+    {% catch %}
+        <div class="alert alert-error">{{ e.getMessage }}</div>
+    {% endtry %}
+{% endmacro %}
+
+{% macro displayTitle(item) %}
+    {% if not item.icon_only or not (item.image or item.icon) %}
+        {% if item.subtitle %}
+        <div>{{ item.title }}
+        <div class="jl-navbar-subtitle">{{ item.subtitle }}</div></div>
+        {% else %}
+        {{ item.title }}
+        {% endif %}
+    {% endif %}
+{% endmacro %}
+
+{% macro displayItem(item, menu, context, dropdown_type, start_level) %}
+    {% import _self as self %}
+    {% if item.type == 'particle' and not item.options.particle.enabled %}
+        {% set enabled = 0 %}
+    {% endif %}
+    {% if item.visible and item.enabled and enabled|default(1) %}
+        {% set title = item.icon_only or item.link_title ? ' title="' ~ item.link_title|default(item.title)|e ~ '"' %}
+        {% set label = item.icon_only and (item.image or item.icon) ? ' aria-label="' ~ item.title|e ~'"' %}
+        {% if context.particle.navbar_style %}
+        {% set active = menu.isActive(item) ? ' jl-active' %}
+        {% else %}
+        {% set active = menu.isActive(item) ? ' active' %}
+        {% endif %}
+        {% set dropdown = item.level == start_level ? ' g-' ~ item.getDropdown() %}
+        {% if context.particle.navbar_style %}
+        {% set parent = item.hasChildren() and not item.dropdown_hide ? ' jl-parent' %}
+        {% else %}
+        {% set parent = item.hasChildren() and not item.dropdown_hide ? ' g-parent' %}
+        {% endif %}        
+        
+        {% set target = (item.target != '_self' or context.particle.forceTarget) ? ' target="' ~ item.target|e ~ '"' %}
+        {% set rel = item.rel %}
+
+        {% if item.target == '_blank' %}
+            {% if 'noopener' not in rel %}
+                {% set rel = rel ? rel ~ ' ' : rel %}
+                {% set rel = rel ~ 'noopener' %}
+            {% endif %}
+            {% if 'noreferrer' not in rel %}
+                {% set rel = rel ? rel ~ ' ' : rel %}
+                {% set rel = rel ~ 'noreferrer' %}
+            {% endif %}
+        {% endif %}
+
+        {% set listAttributes = item.attributes|attribute_array %}
+        {% set linkAttributes = '' %}
+
+        {% if item.link_attributes %}
+            {% for attribute in item.link_attributes %}
+                {% for key, value in attribute %}
+                    {% if key == 'rel' %}
+                        {% for hVal in value|split(' ') %}
+                            {% if hVal not in rel %}
+                                {% set rel = rel ? rel ~ ' ' : rel %}
+                                {% set rel = rel ~ hVal %}
+                            {% endif %}
+                        {% endfor %}
+                    {% else %}
+                        {% set linkAttributes = linkAttributes ~ ' ' ~ key|e ~ '="' ~ value|e('html_attr') ~ '"' %}
+                    {% endif %}
+                {% endfor %}
+            {% endfor %}
+        {% endif %}
+
+        {# Special handling for opening link in a new window without navigation #}
+        {% if item.target == '_nonav' %}
+            {% set target = 'target="_blank"' %}
+            {% set linkAttributes = linkAttributes ~ ' onclick="window.open(this.href, \'targetWindow\', \'toolbar=no,location=no,status=no,menubar=no,scrollbars=yes,resizable=yes\'); return false;"' %}
+        {% endif %}
+
+        {% set rel = rel ? ' rel="' ~ rel|e('html_attr') ~ '"' %}
+        {% if context.particle.navbar_style %}
+        <li class="item-{{ item.id }}{% if not item.dropdown_hide %}{{ parent }}{% endif %}{{ active }}{% if item.class %} {{ item.class|default('') }}{% endif %}{% if not parent %}{% if item.type == 'separator' %} jl-nav-divider{% elseif item.type == 'heading' %} jl-nav-header{% endif %}{% endif %}"
+                {{- self.getCustomWidth(item, menu, 'item', dropdown) }}
+                {%- if context.particle.renderTitles|default(0) %} title="{{ item.title }}"{% endif %}{{listAttributes|raw}}>
+                {% if item.url %}
+                <a{% if item.anchor_class %} class="{{ item.anchor_class }}"{% endif %} href="{{ item.url }}{{ item.hash }}"{{ (title ~ label ~ target ~ rel ~ linkAttributes)|raw }}>
+                {% if item.image %}
+                    <img src="{{ url(item.image) }}" alt="{{ item.title }}" />
+                {% elseif item.icon %}
+                    <i class="{{ item.icon }}" aria-hidden="true"></i>
+                {% endif %}
+                {{ self.displayTitle(item) }}
+                </a>
+                {% else %}
+                    {% if item.type == 'particle' %}
+                        {{ self.displayParticle(item, context) }}
+                    {% elseif item.type == 'heading' %}
+                        {% if item.children|length %}
+                        <a{% if item.anchor_class %} class="{{ item.anchor_class }}"{% endif %}{{ (title ~ label ~ target ~ rel ~ linkAttributes)|raw }}>
+                        {% if item.image %}
+                            <img src="{{ url(item.image) }}" alt="{{ item.title }}" />
+                        {% elseif item.icon %}
+                            <i class="{{ item.icon }}" aria-hidden="true"></i>
+                        {% endif %}
+                        {{ self.displayTitle(item) }}
+                        </a>
+                        {% else %}
+                        {% if item.image %}
+                            <img src="{{ url(item.image) }}" alt="{{ item.title }}" />
+                        {% elseif item.icon %}
+                            <i class="{{ item.icon }}" aria-hidden="true"></i>
+                        {% endif %}
+                        {{ self.displayTitle(item) }}
+                        {% endif %}
+                    {% else %}
+                        {% if item.children|length %}
+                        <a{% if item.anchor_class %} class="{{ item.anchor_class }}"{% endif %}{{ (title ~ label ~ target ~ rel ~ linkAttributes)|raw }}>
+                        {% if item.image %}
+                            <img src="{{ url(item.image) }}" alt="{{ item.title }}" />
+                        {% elseif item.icon %}
+                            <i class="{{ item.icon }}" aria-hidden="true"></i>
+                        {% endif %}
+                        {{ self.displayTitle(item) }}
+                        </a>
+                        {% endif %}
+                    {% endif %}
+ 
+                {% endif %}
+
+        {% else %}
+        <li class="g-menu-item g-menu-item-type-{{ item.type }} g-menu-item-{{ item.id }}{% if not item.dropdown_hide %}{{ parent }}{% endif %}{{ active }}{{ dropdown }} {% if item.url and parent %}{% if not item.dropdown_hide %}g-menu-item-link-parent{% endif %}{% endif %} {{ item.class|default('') }}"
+                {{- self.getCustomWidth(item, menu, 'item', dropdown) }}
+                {%- if context.particle.renderTitles|default(0) %} title="{{ item.title }}"{% endif %}{{listAttributes|raw}}>      
+            {% if item.url %}
+                <a class="g-menu-item-container{{ item.anchor_class ? ' ' ~ item.anchor_class }}" href="{{ item.url }}{{ item.hash }}"{{ (title ~ label ~ target ~ rel ~ linkAttributes)|raw }}>
+            {% else %}
+                <div class="g-menu-item-container{{ item.anchor_class ? ' ' ~ item.anchor_class }}" data-g-menuparent=""{{ label|raw }}>{% endif %}
+                {% if item.image %}
+                    <img src="{{ url(item.image) }}" alt="{{ item.title }}" />
+                {% elseif item.icon %}
+                    <i class="{{ item.icon }}" aria-hidden="true"></i>
+                {% endif %}
+                {% if item.url %}
+                    <span class="g-menu-item-content">
+                        {{ self.displayTitle(item) }}
+                    </span>
+                    {% if parent and not item.dropdown_hide -%}
+                        <span class="g-menu-parent-indicator" data-g-menuparent=""></span>
+                    {%- endif %}
+                {% else %}
+                {% if item.type == 'particle' %}
+                    {{ self.displayParticle(item, context) }}
+                {% elseif item.type == 'heading' %}
+                    <span class="g-nav-header g-menu-item-content"{{ title|raw }}>{{ self.displayTitle(item) }}</span>
+                {% else %}
+                    <span class="g-separator g-menu-item-content"{{ title|raw }}>{{ self.displayTitle(item) }}</span>
+                {% endif %}
+                {% if parent and not item.dropdown_hide -%}
+                    <span class="g-menu-parent-indicator"></span>
+                {%- endif %}
+
+                {% endif %}
+            {% if item.url %}</a>
+            {% else %}</div>{% endif %}                  
+        {% endif %}        
+            {% if parent -%}
+                {{ self.displaySubmenu(item, menu, context, dropdown_type, start_level) }}
+            {%- endif %}
+        </li>
+    {% endif %}
+{% endmacro %}
+
+{% macro displayContainers(item, menu, context, dropdown_type, start_level) %}
+    {% import _self as self %}
+    {% set groups = item.getDropdown() == 'standard' ? [item] : item.groups %}
+    {% if context.particle.navbar_style %}
+        {% for column, items in groups %}
+        {% if item.groups|length > 1 %}<div>{% endif %}
+            <ul class="jl-nav jl-navbar-dropdown-nav">
+                {{ self.displayItems(items, menu, context, dropdown_type, start_level) }}
+            </ul>
+        {% if item.groups|length > 1 %}</div>{% endif %}
+        {% endfor %}    
+    {% else %}
+        <div class="g-grid">
+        {% for column, items in groups %}
+        <div class="g-block {{ item.columnWidth(column)|toGrid }}">
+            <ul class="g-sublevel">
+                {{ self.displayItems(items, menu, context, dropdown_type, start_level) }}
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endmacro %}
+
+{% macro displayItems(items, menu, context, dropdown_type, start_level) %}
+    {% import _self as self %}
+    {% for item in items %}
+        {% set start_level = start_level ?? root_level ?? item.level %}
+        {% set dropdown = dropdown_type ?? item.dropdown %}
+        {{ self.displayItem(item, menu, context, dropdown, start_level) }}
+    {% endfor %}
+{% endmacro %}
+
+{% macro displaySubmenu(item, menu, context, dropdown_type, start_level) %}
+    {% import _self as self %}
+    {% if not item.dropdown_hide %}
+        {% set animation = context.gantry.config.get('styles.menu.animation')|default('g-fade') %}
+        {% if ((item.groups|length == 1 and not dropdown_type == 'fullwidth') or dropdown_type == 'standard') or (item.width|default('auto') != 'auto' and dropdown_type == 'fullwidth')%}
+            {% set dropdown_dir = 'g-dropdown-' ~ item.dropdown_dir|default('right') %}
+        {% endif %}
+        {% if context.particle.navbar_style %}
+        <div class="jl-navbar-dropdown{% if item.groups|length > 1 %} jl-navbar-dropdown-width-{{item.groups|length}}{% endif %}"{% if item.groups|length > 3 %} jl-drop="boundary: #{{ context.id }} .jl-navbar; boundary-align: true; pos: bottom-justify;{{ context.particle.hoverExpand|default('true') ? '': ' mode: click' }}"{% endif %}{{ self.getCustomWidth(item, menu, 'submenu', dropdown_type, start_level) }}>
+            {% if item.groups|length > 1 %}<div class="jl-navbar-dropdown-grid jl-child-width-1-{{item.groups|length}}" jl-grid>{% endif %}
+                {{ self.displayContainers(item, menu, context, dropdown_type) }}
+            {% if item.groups|length > 1 %}</div>{% endif %}
+        </div>
+        {% else %}
+        <ul class="g-dropdown g-inactive {{ animation }} {{ dropdown_dir }}{% if context.particle.dropdown_navbar_text_transform %} jl-text-{{ context.particle.dropdown_navbar_text_transform|e }}{% endif %}"{{ self.getCustomWidth(item, menu, 'submenu', dropdown_type, start_level) }}>
+            <li class="g-dropdown-column">
+               {{ self.displayContainers(item, menu, context, dropdown_type, start_level) }}
+            </li>
+        </ul>        
+        {% endif %}
+
+    {% endif %}
+{% endmacro %}
+
+{% import _self as macro %}
+
+{% set logo_init = particle.image or particle.text %}
+
+{% set logo_render %}
+
+    {% set class=(particle.class ? 'class="'~ particle.class ~'"') %}
+    {% set height = particle.height ? 'style="max-height: ' ~ particle.height ~ '"' %}
+
+    {% if particle.image %}
+        <img src="{{ url(particle.image)|e }}" {{ height|default('')|raw }} alt="{{ particle.text }}"{{ particle.svg_support ? ' jl-svg' : '' }}>
+    {% else %}
+        {{ particle.text|raw }} 
+    {% endif %}
+
+{% endset %}
+
+{% set mobile_logo_render %}
+
+    {% set class=(particle.class ? 'class="'~ particle.class ~'"') %}    
+    {% set image_height = particle.image_height ? 'style="max-height: ' ~ particle.image_height ~ '"' %}
+
+    {% if particle.mobile_logo_image %}
+        <img src="{{ url(particle.mobile_logo_image)|e }}" {{ image_height|default('')|raw }} alt="{{ particle.text }}"{{ particle.svg_support ? ' jl-svg' : '' }}>
+    {% else %}
+        {{ particle.text|raw }} 
+    {% endif %}
+
+{% endset %}
+
+{# Header Layout #}
+
+{% if menu.root.count() %}
+
+<div id="{{ id }}" class="tm-header{{ particle.navbar_style ? ' menu-extended' : ' menu-simple' }} jl-visible@{{particle.menu_visibility|e}}{% if particle.transparent_header %} jl-header-overlay{% endif %}" jl-header>
+
+{% if particle.sticky and particle.section is empty %}
+<div jl-sticky media="@{{ particle.menu_visibility|e }}"{{ particle.sticky == 'stickyonscroll' ? ' show-on-up animation="jl-animation-slide-top"' : '' }}{% if particle.top %} top="{{ particle.top|e }}"{% endif %}{% if particle.offset %} offset="{{ particle.offset|e }}"{% endif %} cls-active="jl-navbar-sticky"{% if particle.transparent_header %} cls-inactive="jl-navbar-transparent jl-{{ particle.transparent_header|e }}"{% endif %} sel-target=".jl-navbar-container">
+{% endif %}
+
+<div class="jl-navbar-container{% if particle.transparent_header and not particle.sticky %} jl-navbar-transparent jl-{{ particle.transparent_header|e }}{% endif %}">
+
+{% if particle.container_maxwidth %}
+    <div class="{{ theme_container }}">
+        {{ particle.container_maxwidth == 'custom' ? '<div class="navbar-wrapper">' : '' }}
+{% endif %}
+
+    <nav class="jl-navbar{{ particle.navbar_style ? ' jl-main-nav' : ' g-main-nav' }}"{% if particle.navbar_style %} jl-navbar="boundary: #{{id}};{{ particle.hoverExpand|default('true') ? '': ' mode: click' }}"{% else %}{{ particle.mobileTarget ? ' data-g-mobile-target' : '' }} data-g-hover-expand="{{ particle.hoverExpand|default('true') ? 'true': 'false' }}"{% endif %}>
+
+        {% if logo_init or particle.layout == 'left' %}
+        <div class="jl-navbar-left">
+
+        {% if logo_init %}
+            <a class="jl-navbar-item jl-logo" href="{{ gantry.siteUrl() }}" title="{{ particle.text|striptags }}" aria-label="{{ particle.text|striptags }}" rel="home" {{ class|default('')|raw }}>
+                {{ logo_render }}
+            </a>
+        {% endif %}
+
+        {% if particle.layout == 'left' %}
+        <ul class="{{ particle.navbar_style|e ? 'jl-navbar-nav': 'g-toplevel' }}{{ particle.navbar_text_transform|e ? ' jl-text-' ~ particle.navbar_text_transform|e : '' }}">
+            {{ macro.displayItems(menu.root, menu, _context) }}
+        </ul>
+        {% endif %}
+
+        {% if particle.layout == 'left' and particle.search_pos == 'navbar' %}
+        <div class="jl-navbar-item">
+            {{ navbar_search }}
+        </div>
+        {% endif %}
+
+        {% if particle.layout == 'left' and particle.social_pos == 'navbar' and particle.social_items %}
+        <div class="jl-navbar-item">
+            <div class="jl-margin-remove-last-child custom">
+                {{ social_icons }}
+            </div>
+        </div>
+        {% endif %}
+
+        </div>
+        {% endif %}
+
+        {% if particle.layout == 'center' %}
+
+        <div class="jl-navbar-center">
+
+        {% if particle.layout == 'center' %}
+        <ul class="{{ particle.navbar_style|e ? 'jl-navbar-nav': 'g-toplevel' }}{{ particle.navbar_text_transform|e ? ' jl-text-' ~ particle.navbar_text_transform|e : '' }}">
+            {{ macro.displayItems(menu.root, menu, _context) }}
+        </ul>
+        {% endif %}
+
+        {% if particle.layout == 'center' and particle.search_pos == 'navbar' %}
+        <div class="jl-navbar-item">
+            {{ navbar_search }}
+        </div>
+        {% endif %}
+
+        {% if particle.layout == 'center' and particle.social_pos == 'navbar' and particle.social_items %}
+        <div class="jl-navbar-item">
+            <div class="jl-margin-remove-last-child">
+                {{ social_icons }}
+            </div>
+        </div>
+        {% endif %}
+
+        </div>
+        {% endif %}
+
+        {% if particle.social_pos == 'header' or particle.search_pos == 'header' or particle.html_pos == 'header' or particle.layout == 'right' %}
+        <div class="jl-navbar-right">
+
+        {% if particle.layout == 'right' %}
+        <ul class="{{ particle.navbar_style|e ? 'jl-navbar-nav': 'g-toplevel' }}{{ particle.navbar_text_transform|e ? ' jl-text-' ~ particle.navbar_text_transform|e : '' }}">
+            {{ macro.displayItems(menu.root, menu, _context) }}
+        </ul>
+        {% endif %}
+
+        {% if particle.layout == 'right' and particle.search_pos == 'navbar' %}
+        <div class="jl-navbar-item">
+            {{ navbar_search }}
+        </div>
+        {% endif %}
+
+        {% if particle.layout == 'right' and particle.social_pos == 'navbar' and particle.social_items %}
+        <div class="jl-navbar-item">
+            <div class="jl-margin-remove-last-child">
+                {{ social_icons }}
+            </div>
+        </div>
+        {% endif %}
+
+        {% if particle.search_pos == 'header' %}
+        <div class="jl-navbar-item">
+            {{ navbar_search }}
+        </div>
+        {% endif %}
+
+        {% if particle.social_pos == 'header' and particle.social_items %}
+        <div class="jl-navbar-item">
+            <div class="jl-margin-remove-last-child">
+                {{ social_icons }}
+            </div>
+        </div>
+        {% endif %}
+
+        </div>
+        {% endif %}
+
+    </nav>
+
+{% if particle.container_maxwidth %}
+        {{ particle.container_maxwidth == 'custom' ? '</div>' : '' }}
+    </div>
+{% endif %}
+</div>
+
+{% if particle.sticky and particle.section is empty %}
+</div>
+{% endif %}
+
+</div>
+{% endif %}
+
+{# Mobile Header #}
+
+<div class="{% if particle.container_maxwidth %}tm-header-mobile {% endif %}jl-hidden@{{ particle.menu_visibility|e }}">
+
+{% if particle.m_sticky %}
+<div jl-sticky{{ particle.m_sticky == 'stickyonscroll' ? ' show-on-up animation="jl-animation-slide-top"' : '' }}{% if particle.ms_top %} top="{{ particle.ms_top|e }}"{% endif %}{% if particle.ms_offset %} offset="{{ particle.ms_offset|e }}"{% endif %} cls-active="jl-navbar-sticky" sel-target=".jl-navbar-container">
+{% endif %}
+
+<div class="jl-navbar-container">
+
+    {% if particle.container_maxwidth %}
+        <div class="{{ theme_container }}">
+    {% endif %}
+
+        <nav class="jl-navbar" jl-navbar="container: .tm-header-mobile">
+
+            {% if particle.mobile_logo == 'left' or particle.mobile_menu_toggle == 'left' %}
+
+                <div class="jl-navbar-left">
+
+                    {% if particle.mobile_logo == 'left' %}
+                    <a class="jl-navbar-item jl-logo" href="{{ gantry.siteUrl() }}" title="{{ particle.text|striptags }}" aria-label="{{ particle.text|striptags }}" rel="home" {{ class|default('')|raw }}>
+                        {{ particle.mobile_logo_image ? mobile_logo_render : logo_render }}
+                    </a>
+                    {% endif %}
+
+                    {% if particle.mobile_menu_toggle == 'left' %}
+                        {{ menu_toggle }}
+                    {% endif %}
+
+                </div>
+            {% endif %}
+
+            {% if particle.mobile_logo == 'center' %}
+                <div class="jl-navbar-center">
+                    <a class="jl-navbar-item jl-logo" href="{{ gantry.siteUrl() }}" title="{{ particle.text|striptags }}" aria-label="{{ particle.text|striptags }}" rel="home" {{ class|default('')|raw }}>
+                        {{ particle.mobile_logo_image ? mobile_logo_render : logo_render }}
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if particle.mobile_logo == 'right' or particle.mobile_menu_toggle == 'right' %}
+                <div class="jl-navbar-right">
+                    {% if particle.mobile_logo == 'right' %}
+                    <a class="jl-navbar-item jl-logo" href="{{ gantry.siteUrl() }}" title="{{ particle.text|striptags }}" aria-label="{{ particle.text|striptags }}" rel="home" {{ class|default('')|raw }}>
+                        {{ particle.mobile_logo_image ? mobile_logo_render : logo_render }}
+                    </a>
+                    {% endif %}
+
+                    {% if particle.mobile_menu_toggle == 'right' %}
+                        {{ menu_toggle }}
+                    {% endif %}
+                </div>
+            {% endif %}
+
+        </nav>
+
+    {% if particle.container_maxwidth %}
+        </div>
+    {% endif %}
+
+</div>
+
+{% if particle.menu_animation == 'dropdown' %}
+{% include '@particles/jlnavcanvas.html.twig' ignore missing %}
+{% endif %}
+{% if particle.m_sticky %}
+</div>
+{% endif %}
+
+{% if particle.menu_animation != 'dropdown' %}
+{% include '@particles/jlnavcanvas.html.twig' ignore missing %}
+{% endif %}
+
+</div>

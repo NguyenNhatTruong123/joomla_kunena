@@ -1,0 +1,9 @@
+enabled: '1'
+date:
+  start: ''
+  end: now
+owner: 'All rights reserved. Designed &amp; Developed by <a href="https://joomlead.com/" target="_blank">JoomLead</a>'
+link: ''
+target: _blank
+css:
+  class: ''

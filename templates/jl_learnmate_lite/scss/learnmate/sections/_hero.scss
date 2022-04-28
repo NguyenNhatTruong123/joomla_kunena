@@ -1,0 +1,24 @@
+#g-hero {
+    color: $hero-text-color;
+    background: $hero-background;
+
+    position: relative;
+
+    .g-grid {
+        position: relative;
+    }
+
+    @if $hero-background-image {
+        background-image: url($hero-background-image);
+        background-size: cover;
+        background-position: center;
+    }
+
+}
+
+@media print {
+    #g-hero {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}

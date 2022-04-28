@@ -1,0 +1,50 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block stylesheets %}
+{% if particle.background_color or particle.icon_color %}
+<style>
+{% if particle.background_color or particle.icon_color %}
+#{{ id }} .jl-icon-button { {% if particle.background_color %}background-color: {{ particle.background_color }}; {% endif %}{% if particle.icon_color %}color: {{particle.icon_color}};{% endif %} }
+{% endif %}
+</style>
+{% endif %}
+{% endblock %}
+
+{% block javascript %}
+<script src="{{ url('gantry-theme://js/jlcomponents/lightbox.min.js') }}"></script>
+<script src="{{ url('gantry-theme://js/jlcomponents/tooltip.min.js') }}"></script>
+{% endblock %}
+
+{% pageblock head_bottom %}
+{% set item_content %}
+{% set total = particle.items|length %}
+<ul class="jl-iconnav jl-iconnav-vertical jl-flex-middle jl-text-center">
+{% for item in particle.items %}
+{% if total > 1 %}
+<li class="tm-item jl-display-inline-block{% if item.item_class %} {{ item.item_class }}{% endif %}"{% if item.link_target == '_lightbox' %} jl-lightbox{% endif %}>
+{% endif %}
+{% if item.link %}
+<a class="jl-icon-button" href="{{ item.link|e }}" target="{{ item.link_target|default('_self')|e }}" jl-tooltip="title: {{item.title|raw}}; pos: left"{% if item.link_target == '_lightbox' %} data-caption="{{item.title|raw}}" data-type="iframe"{% endif %}>
+{% endif %}
+{% if item.icon %}<span class="{{item.icon}}" aria-hidden="true"></span> {% endif %}
+{% if item.link %}
+</a>
+{% endif %}
+{% if total > 1 %}
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endset %}
+
+<div id="{{id}}" class="jl-notify jl-notification-bottom-right jl-animation-fade">
+    <div class="tm-notify jl-inline">
+        <a class="jl-icon-button">
+        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect x="9" y="1" width="1" height="17"></rect><rect x="1" y="9" width="17" height="1"></rect></svg>
+        </a>
+        <div jl-drop="pos: top-justify;{% if particle.mode != 'hover' %} mode: {{particle.mode}};{% endif %} animation: jl-animation-slide-bottom-small;">
+        {{ item_content }}
+    </div>
+    </div>
+</div>
+{% endpageblock %}

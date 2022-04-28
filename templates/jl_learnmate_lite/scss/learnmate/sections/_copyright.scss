@@ -1,0 +1,27 @@
+#g-copyright {
+    background: $copyright-background;
+    color: $copyright-text-color;
+    a {
+        &.jl-icon-button {
+            color: initial;
+            &:hover,
+            &:focus,
+            &:active {
+                color: $accent-color-1;
+            }
+        }
+        color: $copyright-link-color;
+        &:hover,
+        &:focus,
+        &:active {
+            color: $copyright-link-hover-color;
+        }
+    }
+}
+
+@media print {
+    #g-copyright {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}

@@ -1,0 +1,9 @@
+edu-theme:
+  title: 'Edu Theme'
+  description: 'Sample menu for Edu theme.'
+
+  items:
+    edu:
+      title: 'Home'
+      outline: home
+      home: 1

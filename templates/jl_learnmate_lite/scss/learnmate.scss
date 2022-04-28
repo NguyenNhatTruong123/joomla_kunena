@@ -1,0 +1,130 @@
+// REQUIRED DEPENDENCIES - DO NOT CHANGE
+@import "dependencies";
+
+// THEME COMPONENTS
+// Base
+@import "nucleus/theme/base";
+
+// THEME STYLING
+
+// Utilities
+@import "learnmate/styles/utilities";
+
+// Body
+@import "learnmate/styles/body";
+
+// Logo
+@import "learnmate/styles/logo";
+
+// Menu
+@import "learnmate/styles/menu";
+
+// Typography
+@import "learnmate/styles/typography";
+
+// Variations
+@import "learnmate/styles/variations";
+
+// Tables
+@import "learnmate/styles/tables";
+
+// Forms
+@import "learnmate/styles/forms";
+
+// Style Specific Styling
+@import "learnmate/styles/theme-style";
+
+// Dropdown Animations
+@import "learnmate/styles/dropdownanimations";
+
+//-------------------------------------------//
+
+// SECTIONS STYLING
+
+// Top
+@import "learnmate/sections/top";
+
+// Slideshow
+@import "learnmate/sections/slideshow";
+
+// Navigation
+@import "learnmate/sections/navigation";
+
+// Header
+@import "learnmate/sections/header";
+
+// Above
+@import "learnmate/sections/above";
+
+// Hero
+@import "learnmate/sections/hero";
+
+// Showcase
+@import "learnmate/sections/showcase";
+
+// Utility
+@import "learnmate/sections/utility";
+
+// Feature
+@import "learnmate/sections/feature";
+
+// Main
+@import "learnmate/sections/main";
+
+// Aside
+@import "learnmate/sections/aside";
+
+// Sidebar
+@import "learnmate/sections/sidebar";
+
+// Expanded
+@import "learnmate/sections/expanded";
+
+// Extension
+@import "learnmate/sections/extension";
+
+// Bottom
+@import "learnmate/sections/bottom";
+
+// Below
+@import "learnmate/sections/below";
+
+// Footer
+@import "learnmate/sections/footer";
+
+// Copyright
+@import "learnmate/sections/copyright";
+
+// OffCanvas
+@import "learnmate/sections/offcanvas";
+
+//-------------------------------------------//
+
+// Particles
+
+// Common Styles
+@import "learnmate/particles/jlparticles";
+
+// Social Share
+@import "learnmate/particles/jlsocialshare";
+
+// Back To Top
+@import "learnmate/particles/jlbacktotop";
+
+// Video
+@import "learnmate/particles/jlvideo";
+
+//-------------------------------------------//
+
+// Layouts
+
+// Offline
+@import "learnmate/layouts/offline";
+
+// Error
+@import "learnmate/layouts/error";
+
+// BREAKPOINTS
+@import "nucleus/theme/breakpoints/base";
+
+//-------------------------------------------//

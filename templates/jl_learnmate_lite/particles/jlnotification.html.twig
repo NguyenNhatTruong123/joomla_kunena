@@ -1,0 +1,76 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+{% block stylesheets %}
+
+<style>
+{% if particle.type == 'bar' %}
+.jl-position-z-index {z-index: 9;}
+{% endif %}
+</style>
+
+{% endblock %}
+
+{% block particle %}
+{% pageblock body_top %}
+{% if particle.type == 'bar' %}
+<div id="{{id}}" class="jl-section jl-section-xsmall jl-section-{{particle.bar_style}}{% if particle.bar_position != 'top' %} jl-position-{{ particle.bar_position|e }} jl-position-fixed{% endif %} jl-position-z-index">
+<div class="jl-container jl-container-expand jl-text-center">
+{{ particle.message|raw }}
+{% if particle.button_styles == 'icon' %}
+<button type="button" class="el-accept jl-close jl-position-center-right jl-position-medium jl-icon" data-jl-close data-jl-toggle="target: !.jl-section; animation: true"></button>
+{% else %}
+<button type="button" class="el-accept jl-button jl-button-{{particle.button_styles}} jl-margin-small-left" data-jl-toggle="target: !.jl-section; animation: true">{{particle.button|default('Ok')|raw}}</button>
+{% endif %}
+{% if particle.reject_button %}
+<button type="button" class="el-reject jl-button jl-button-default jl-margin-small-left" data-jl-toggle="target: !.jl-section; animation: true">{{particle.reject_button|raw}}</button>
+{% endif %}
+</div>
+</div>
+{% else %}
+<div id="{{id}}" class="jl-notification jl-notification-{{ particle.position|e }}">
+<div class="jl-notification-message{% if particle.style != 'default' %} jl-notification-message-{{particle.style}}{% endif %} jl-panel">
+
+{{ particle.message|raw }}
+
+<p class="jl-margin-small-top">
+{% if particle.button_styles == 'icon' %}
+<button type="button" class="el-accept jl-notification-close jl-close jl-icon" data-jl-close data-jl-toggle="target: !.jl-notification; animation: jl-animation-fade"></button>
+{% else %}
+<button type="button" class="el-accept jl-button jl-button-{{particle.button_styles}}" data-jl-toggle="target: !.jl-notification; animation: jl-animation-fade">{{particle.button|default('Ok')|raw}}</button>
+{% endif %}
+{% if particle.reject_button %}
+<button type="button" class="el-reject jl-button jl-button-default{{ particle.button_styles != 'icon' ? ' jl-margin-small-left' : '' }}" data-jl-toggle="target: !.jl-notification; animation: jl-animation-fade">{{particle.reject_button|raw}}</button>
+{% endif %}
+</p>
+
+</div>
+</div>
+{% endif %}
+{% endpageblock %}
+{% endblock %}
+
+{% block javascript %}
+{% do gantry.load('jquery') %}
+<script src="{{ url('gantry-theme://js/jlcomponents/notification.min.js') }}"></script>
+{% do gantry.document.addScript(url('gantry-theme://js/js.cookie.min.js')) %}
+<script>
+(function ($) {
+    $(document).on('ready', function () {
+        jlNotification()
+    });
+    if (Cookies.get('{{id}}_cookieAllowed') == 'true') {
+        var el = '#{{id}}';
+        $(el).hide();
+    }
+    function jlNotification() {
+        $('#{{id}} .el-accept').on('click', function () {
+            Cookies.set('{{id}}_cookieAllowed', true, { expires: {{ particle.expires | e |default('365') }} }); // cookie will expire in 365 days
+        });
+    $('#{{id}} .el-reject').on('click', function () {
+      Cookies.set('{{id}}_cookieAllowed', false, { expires: {{ particle.expires | e |default('365') }} }); // cookie will expire in 365 days
+      });      
+    }
+  
+  }) (jQuery);
+</script>
+
+{% endblock %}

@@ -1,0 +1,17 @@
+#g-header {
+    background-color: $header-background;
+    color: $header-text-color;
+    background-blend-mode: overlay;
+    @if $header-background-image {
+        background-image: url($header-background-image);
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+@media print {
+    #g-header {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}

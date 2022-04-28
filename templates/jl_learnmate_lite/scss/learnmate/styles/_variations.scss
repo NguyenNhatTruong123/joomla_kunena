@@ -1,0 +1,197 @@
+.moduletable, .widget {
+  &[class*="box"], &[class*="shadow"] {
+    padding: $content-padding;
+    margin: $content-margin;
+  }
+}
+
+.box1 {
+  &.moduletable, &.widget, &.g-outer-box,> .g-content {
+    background: $box1-background;
+    box-shadow: $base-box-shadow;
+  }
+  &.moduletable, &.widget, > .g-content {
+    &, h1, h2, h3, h4, h5, h6, strong, i {
+      color: darken($box1-background, 65%);
+    }
+  }
+}
+
+.box2 {
+  &.moduletable, &.widget, &.g-outer-box, > .g-content {
+    background: $box2-background;
+  }
+  
+  a {
+    color: lighten($accent-color-1, 35%);
+    &:hover {
+      color: $white;
+    }
+  }
+  &.moduletable, &.widget, > .g-content {
+    &, h1, h2, h3, h4, h5, h6, strong, i {
+      color: $white;
+    }
+  }
+}
+
+.box3 {
+  &.moduletable, &.widget, &.g-outer-box,
+  > .g-content {
+    background: $accent-color-1;
+  }
+  &.moduletable, &.widget, > .g-content {
+    &, h1, h2, h3, h4, h5, h6, strong, i {
+      color: $white;
+    }
+    a {
+      color: lighten($accent-color-1, 35%);
+      &:hover {
+        color: $white;
+      }
+    }
+    .jl-button {
+      background-color: transparent;
+      color: $white;
+      border: 1px solid $white;
+      &:hover {
+        background: $white;
+        color: #111;
+      }
+    }
+  }
+}
+
+.box4 {
+  &.moduletable, &.widget, &.g-outer-box, > .g-content {
+    background: $accent-color-2;
+  }
+  &.moduletable, &.widget, > .g-content {
+    &, h1, h2, h3, h4, h5, h6, strong, i {
+      color: $white;
+    }
+    a {
+      color: lighten($accent-color-2, 35%);
+      &:hover {
+        color: $white;
+      }
+    }
+    .jl-button {
+      background-color: transparent;
+      color: $white;
+      border: 1px solid $white;
+      &:hover {
+        background: $white;
+        color: #111;
+      }
+    }
+  }
+}
+
+.box5 {
+  &.moduletable, &.widget, &.g-outer-box, > .g-content {
+    background: #f8f9fa;
+  }
+  &.moduletable, &.widget, > .g-content {
+    &, h1, h2, h3, h4, h5, h6, strong, i {
+      color: #464646;
+    }
+  }
+}
+
+.box6 {
+  &.moduletable, &.widget, &.g-outer-box, > .g-content {
+    background: #111;
+  }
+  &.moduletable, &.widget, > .g-content {
+    &, h1, h2, h3, h4, h5, h6, strong, i {
+      color: $white;
+    }
+    a {
+      color: lighten($accent-color-2, 35%);
+      &:hover {
+        color: $white;
+      }
+    }
+    .jl-button {
+      background-color: transparent;
+      color: $white;
+      border: 1px solid $white;
+      &:hover {
+        background: $white;
+        color: #111;
+      }
+    }
+  }
+}
+
+.shadow {
+  &.moduletable, &.widget, &.g-outer-box, > .g-content {
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.1);
+  }
+}
+
+.shadow2 {
+  &.moduletable, &.widget, &.g-outer-box, > .g-content {
+    box-shadow: 0 0 4px rgba(0,0,0,0.15);
+  }
+}
+
+.disabled {
+  &.moduletable, &.widget, &.g-outer-box, > .g-content {
+    opacity: 0.4;
+  }
+}
+
+.square {
+  &.moduletable, &.widget, &.g-outer-box, > .g-content {
+    border-radius: none;
+  }
+}
+
+.rounded {
+  &.moduletable, &.widget, &.g-outer-box, > .g-content {
+    border-radius: $core-border-radius;
+  }
+}
+
+//
+// Gradient BG
+//
+$gradients: () !default;
+$gradients: map-merge((
+    chill: linear-gradient(135deg, #09e485 0%,#0291e3 100%),
+    warm: linear-gradient(135deg, #F2CD48 0%,#FD803F 100%),
+    hot: linear-gradient(135deg, #F9445A 0%,#FD803F 100%),
+    cold: linear-gradient(135deg, #8019C6 0%,#2F93CC 100%),
+    accent: linear-gradient(135deg, $accent-color-1 0%,$accent-color-2 100%)
+), $gradients);
+
+
+// Gradient backgrounds
+@mixin bg-gradient($parent, $gradient) {
+  #{$parent} {
+    background: $gradient;
+  }
+}
+
+// Gradient text
+@mixin text-gradient($parent, $gradient) {
+  #{$parent} {
+    background-image: $gradient;
+    color:transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    display: inline-block;
+  }
+}
+
+// Gradient Classes 
+@each $gradient, $value in $gradients {
+  @include bg-gradient(".bg-gradient-#{$gradient}", $value !important);
+}
+
+// Gradient Classes 
+@each $gradient, $value in $gradients {
+  @include text-gradient(".text-gradient-#{$gradient}", $value);
+}

@@ -1,0 +1,44 @@
+[class*=" icon-"], [class^=icon-] {
+    font-family: Font Awesome\ 5 Free !important;
+    font-weight: 900;
+}
+#bottom ul.mod-articlescategories {
+    margin: 0 0px;
+}
+.module.basic-style1 .sj-basic-news .bs-items .bs-item.last{
+	margin-bottom:20px;
+}
+.yt-loginform li a:hover{
+	cursor:pointer;
+}
+a {
+    text-decoration: none;
+}
+a:not([class]) {
+    text-decoration: none;
+}
+.com-users-login__remember .form-check{
+	padding-left:0;
+}
+.blog-featured .blog-items .blog-item .item-img-box .category-name, 
+.blog .blog-items .blog-item .item-img-box .category-name{
+	margin:0;
+}
+#myLogin .btn-close span{
+	font-size:0;
+}
+.pagination {
+    margin: 1rem 0;
+}
+ul.pagination .page-link span:before{
+	font-weight:900;
+}
+
+.error_site .container-header .navbar-brand img {
+    width: auto;
+    min-width: auto;
+}
+.error_site header{
+    background:#fff;
+	padding:20px 0;
+}

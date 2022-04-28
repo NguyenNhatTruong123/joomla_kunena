@@ -1,0 +1,17 @@
+#g-bottom {
+    background: $bottom-background;
+    color: $bottom-text-color;
+    position: relative;
+    @if $bottom-background-image {
+        background-image: url($bottom-background-image);
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+@media print {
+    #g-bottom {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}

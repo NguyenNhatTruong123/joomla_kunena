@@ -1,0 +1,51 @@
+#g-footer {
+    background: $footer-background;
+    color: $footer-text-color;
+    [id^="module-"][id$="-particle"] {
+        color: $base-text-color;
+    }
+    .jl-card-title {
+        font-size: 22px;
+    }
+    .jl-panel.moduletable {
+        margin-bottom: 20px;
+    }
+    @if $footer-background-image {
+        background-image: url($footer-background-image);
+        background-size: cover;
+        background-position: center;
+    }
+    a {
+        &.jl-icon-button {
+            background-color: $accent-color-1;
+            color: $white;
+            &:hover,
+            &:focus,
+            &:active {
+                color: darken($color: $white, $amount: 10);
+            }
+        }
+    }
+    a:not(.jl-button) {
+        color: $footer-link-color;
+        &:hover,
+        &:focus,
+        &:active {
+            color: $footer-link-hover-color;
+        }
+    }
+    .jl-light {
+        .jl-input,
+        .jl-select,
+        .jl-textarea {
+            border: none;
+        }
+    }
+}
+
+@media print {
+    #g-container-footer {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}

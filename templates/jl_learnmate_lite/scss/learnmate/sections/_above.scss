@@ -1,0 +1,20 @@
+#g-above {
+    color: $above-text-color;
+    background-color: $above-background;
+    position: relative;
+    @if $above-background-image {
+        background-image: url($above-background-image);
+        background-size: cover;
+        background-position: center;
+    }
+    .g-grid {
+        position: relative;
+    }
+}
+
+@media print {
+    #g-above {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}

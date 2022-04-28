@@ -1,0 +1,28 @@
+body {
+	color: $base-text-color;
+	background: $base-background;
+	-webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+#g-page-surround {
+	background: $base-background;
+}
+
+@media print {
+	#g-page-surround {
+		background: #fff !important;
+		color: #000 !important;
+	}
+}
+
+a {
+	color: $accent-color-1;
+	&:hover {
+		color: darken($base-text-color, 10%);
+	}
+}
+
+h1, h2, h3, h4, h5, h6, strong {
+	color: darken($base-text-color, 10%);
+}

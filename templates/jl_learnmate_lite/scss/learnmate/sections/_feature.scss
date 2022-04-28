@@ -1,0 +1,21 @@
+#g-feature {
+    color: $feature-text-color;
+    background: $feature-background;
+    position: relative;
+
+    .g-grid {
+        position: relative;
+    }
+    @if $feature-background-image {
+        background-image: url($feature-background-image);
+        background-size: cover;
+        background-position: center;
+    }
+}
+
+@media print {
+    #g-feature {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}

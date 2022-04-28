@@ -1,0 +1,19 @@
+#g-navigation {
+    color: $navigation-text-color;
+    background: $navigation-background;
+    @if $navigation-background-image {
+        background-image: url($navigation-background-image);
+        background-size: cover;
+        background-position: center;
+    }
+    .g-grid {
+        @include align-items(center);
+    }
+}
+
+@media print {
+    #g-navigation {
+        background: #fff !important;
+        color: #000 !important;
+    }
+}

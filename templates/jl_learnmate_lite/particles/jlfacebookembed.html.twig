@@ -1,0 +1,78 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block stylesheets %}
+{% if particle.particle_title_color or particle.particle_title_fontsize %}
+<style>
+{% if particle.particle_title_color or particle.particle_title_fontsize %}
+#el-{{ id }}.g5-title { {% if particle.particle_title_color %}color: {{ particle.particle_title_color }};{% endif %}{% if particle.particle_title_fontsize %}font-size: {{particle.particle_title_fontsize}}px;{% endif %} }
+{% endif %}
+</style>
+{% endif %}
+{% endblock %}
+
+{# Set Animation #}
+{% set animation %}
+{% if particle.animation != 'inherit' %} jl-scrollspy="cls: jl-animation-{{particle.animation|e}};{% if particle.animation_repeat == 'enabled' %} repeat: true;{% endif %}{% if particle.animation_delay %} delay: {{particle.animation_delay|e}};{% endif %}"{% endif %}
+{% endset %}
+
+{# Set Max-Width Content #}
+{% set content_maxwidth %}
+{% if particle.g_maxwidth != 'inherit' %} jl-width-{{particle.g_maxwidth}}{% if particle.g_maxwidth_breakpoint != 'always' %}@{{particle.g_maxwidth_breakpoint}}{% endif %}{% if particle.g_maxwidth_alignment == 'left' %}{% elseif particle.g_maxwidth_alignment == 'center' %} jl-margin-auto{% else %} jl-margin-auto-left{% endif %}{% endif %}
+{% endset %}
+
+{# Set Particle Alignment #}
+{% set particle_alignment %}
+{% if particle.align != 'inherit' %} jl-text-{{particle.align|e}}{% if particle.breakpoint != 'always' %}@{{particle.breakpoint|e}}{% endif %}{% endif %}{% if particle.align != 'inherit' and particle.breakpoint != 'always' %}{% if particle.fallback != 'inherit' %} jl-text-{{particle.fallback|e}}{% endif %}{% endif %}
+{% endset %}
+
+{# set Particle Title Style #}
+{% set particle_title_style %}
+{% if particle.particle_title %}
+<{{particle.particle_title_element|e}} id="el-{{ id }}" class="g5-title{% if particle.particle_title_align != 'inherit' %} jl-text-{{particle.particle_title_align|e}}{% endif %}{% if particle.particle_predefined_color != 'default' %} jl-text-{{particle.particle_predefined_color|e}}{% endif %}{% if particle.particle_title_style != 'default' %} jl-{{particle.particle_title_style|e}}{% endif %}{% if particle.particle_title_decoration != 'none' %} jl-heading-{{particle.particle_title_decoration|e}}{% endif %}{% if particle.particle_title_text_transform %} jl-text-{{particle.particle_title_text_transform|e}}{% endif %}{% if particle.particle_title_font_weight %} jl-text-{{particle.particle_title_font_weight|e}}{% endif %}">
+{% if particle.particle_title_decoration == 'line' %} <span>{{particle.particle_title|raw}}</span>
+{% else %} {{particle.particle_title|raw}}
+{% endif %}
+</{{particle.particle_title_element|e}}>
+{% endif %}
+{% endset %}
+
+{% block javascript_footer %}
+   <script>(function(d, s, id) {
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) return;
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/{{ particle.locales|e }}/sdk.js#xfbml=1&version=v3.0";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));</script>
+{% endblock %}
+
+{% set video_data_width = (particle.video_data_width ? ' data-width="'~ particle.video_data_width ~'"') %}
+{% set post_data_width = (particle.post_data_width ? ' data-width="'~ particle.post_data_width ~'"') %}
+
+{# Set Visibility #}
+{% if particle.visibility != 'inherit' %}
+{% set visibility = particle.visibility in ['s', 'm', 'l', 'xl'] ? ' jl-visible@' ~ particle.visibility|e : ' jl-' ~ particle.visibility|replace({'-': '@'}) ~ '' %}
+{% endif %}
+
+{# Set Margin #}
+{% if particle.margin != 'inherit' %}
+{% set margin = particle.margin != 'default' ? ' jl-margin-' ~ particle.margin|e : ' jl-margin' %}
+{% endif %}
+
+{% block particle %}
+{% if particle.enabled %}
+{{particle_title_style}}
+<div class="{{ id ~ content_maxwidth ~ particle_alignment ~ visibility ~ pa_z_index ~ margin }}{% if particle.class %} {{ particle.class }}{% endif %}"{{ animation }}>
+{% pageblock body_top %}
+<div id="fb-root"></div>
+{% endpageblock %}
+{% if particle.embed_types == 'video' %}
+ <div class="fb-video" data-href="{{particle.url}}"{{video_data_width|raw}} data-allowfullscreen="{{ particle.allowfullscreen ? 'true' : 'false' }}" data-autoplay="{{ particle.autoplay ? 'true' : 'false' }}" data-show-text="{{ particle.full_post ? 'true' : 'false' }}" data-show-captions="{{ particle.show_captions ? 'true' : 'false' }}"></div>
+{% elseif particle.embed_types == 'post' %}
+<div class="fb-post" data-href="{{particle.url}}"{{post_data_width|raw}} data-lazy="{{ particle.data_lazy ? 'true' : 'false' }}" data-show-text="{{ particle.full_post ? 'true' : 'false' }}"></div>
+{% else %}
+<div class="fb-comment-embed" data-href="{{particle.url}}" data-lazy="{{ particle.data_lazy ? 'true' : 'false' }}" data-include-parent="{{ particle.include_parent ? 'true' : 'false' }}"{{video_data_width|raw}}></div>
+{% endif %}
+</div>
+{% endif %}
+{% endblock %}

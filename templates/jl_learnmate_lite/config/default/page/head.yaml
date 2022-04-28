@@ -1,0 +1,10 @@
+meta: {  }
+head_bottom: ''
+atoms:
+  -
+    id: jluikit-8961
+    type: jluikit
+    title: 'UIkit3 for Gantry5'
+    attributes:
+      enabled: '1'
+      jslocation: head

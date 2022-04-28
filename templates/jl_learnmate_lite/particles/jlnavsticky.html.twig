@@ -1,0 +1,7 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block javascript_footer %}
+<script>
+    jlUIkit.sticky('{{ particle.section|default("#g-navigation") }}', { {% if particle.sticky == 'stickyonscroll' %} showOnUp: true, animation: 'jl-animation-slide-top',{% endif %}{% if particle.media %} media: '@{{ particle.media }}',{% endif %} top: '{{ particle.top|default(0) }}', offset: {{ particle.offset|default(0) }} } )
+</script>
+{% endblock %}

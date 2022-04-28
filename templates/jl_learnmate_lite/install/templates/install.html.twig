@@ -1,0 +1,19 @@
+{% include 'style.html.twig' %}
+
+<div class="g5i">
+    <h1>
+        <span class="g5-title">{{ name }} Template Installed</span>
+        <span class="g5-info">v{{ version }} / {{ date }}</span>
+    </h1>
+
+    <p>By Installing Sample Data a new Home menu item will be created. The Home menu item and this template will be set as default. <br/>Other sample pages will be created as well. Click the button below to proceed.</p>
+
+    <div class="g5-actions">
+        <a href="{{ install_url }}" class="g5-button sample-data"><span class="g5-icon icon-cube"></span> Install Sample Data</a>
+        <a href="{{ edit_url }}" class="g5-button config-layout"><span class="g5-icon icon-cogs"></span> Configure {{ name }}</a>
+    </div>
+
+    <div class="joomlead-info">
+        Carefully crafted by <a href="https://joomlead.com" target="_blank">JoomLead</a>. Hi-quality Joomla Templates & Gantry 5 Particles
+    </div>
+</div>

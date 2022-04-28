@@ -1,0 +1,335 @@
+::selection {
+  background: $accent-color-1;
+}
+
+// Block Reveal
+.block-revealer__element {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.tm-edit {
+  background: $accent-color-1 !important;
+  color: #fff !important;
+}
+
+// Custom container width for particle background.
+.jl-wrapper {
+  .jl-container {
+    .el-content {
+      padding: $content-padding;
+      margin: $content-margin;
+    }
+  }
+}
+.jl-wrapper,
+.tm-header,
+.tm-header-mobile {
+  .g-container {
+    //display: flow-root;
+    box-sizing: content-box;
+    max-width: $breakpoints-desktop-container;
+    margin-left: auto;
+    margin-right: auto;
+    .el-content {
+      padding: $content-padding;
+      margin: $content-margin;
+    }
+  }
+  @include breakpoint(large-desktop-range) {
+    .g-container {
+      max-width: $breakpoints-large-desktop-container;
+    }
+  }
+  @include breakpoint(desktop-range) {
+    .g-container {
+      max-width: $breakpoints-desktop-container;
+    }
+  }
+  @include breakpoint(tablet-range) {
+    .g-container {
+      max-width: $breakpoints-tablet-container;
+    }
+  }
+  @include breakpoint(large-mobile-range) {
+    .g-container {
+      max-width: $breakpoints-large-mobile-container;
+    }
+  }
+}
+
+// Custom container width for Navbar
+.tm-header,
+.tm-header-mobile {
+  .navbar-wrapper {
+    padding: 0 $content-padding;
+    margin: 0 $content-margin;
+  }
+}
+
+.tm-header-mobile-slide {
+  z-index: 9;
+}
+
+// Unset main nav margin
+[id^="jlnavbar-"][id$="-particle"] {
+  padding: 0 $content-padding;
+  margin: 0 $content-margin;
+}
+
+.menu-simple {
+  .headerbar-nav {
+    padding: 0 $content-padding;
+    margin: 0 $content-margin;
+  }
+  .jl-container .g-main-nav {
+    padding: 0 $content-padding;
+    margin: 0 $content-margin;
+  }
+  .g-main-nav .g-toplevel > li {
+    cursor: pointer;
+  }
+}
+.menu-extended {
+  .jl-container .jl-main-nav {
+    padding: 0 $content-padding;
+    margin: 0 $content-margin;
+  }
+  .nav-stacked {
+    padding: 0 $content-padding;
+    margin: 0 $content-margin;
+  }
+  [class*="jl-drop-bottom"] {
+    margin-top: 0;
+  }
+}
+
+.tm-header-mobile {
+  .jl-navbar {
+    padding: 0 $content-padding;
+    margin: 0 $content-margin;
+  }
+}
+
+.jl-header-overlay {
+  position: absolute;
+  z-index: 980;
+  left: 0;
+  right: 0;
+}
+
+[id^="jlnav-"][id$="-particle"] {
+  .jl-search-input {
+    border-radius: 0;
+    box-shadow: none;
+  }
+}
+
+//Notify
+.jl-notify {
+  position: fixed;
+  bottom: 25px;
+  right: 15px;
+  z-index: 1040;
+  box-sizing: border-box;
+  .jl-iconnav > * > a {
+    display: inline-flex;
+  }
+  .jl-icon-button {
+    width: 45px;
+    height: 45px;
+    background-color: $accent-color-1;
+    color: white;
+    svg {
+      fill: white;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      color: darken($color: $white, $amount: 10);
+    }
+  }
+}
+
+// Unset Theme list style
+ul.jl-accordion,
+ul.jl-list,
+.jl-breadcrumb,
+.jl-comment-list {
+  margin-left: 0;
+}
+
+ul.jl-tab,
+.jl-subnav {
+  margin-top: 0;
+}
+
+address,
+dl,
+fieldset,
+ol,
+p,
+pre,
+ul.jl-list {
+  margin: 0 0 20px 0;
+}
+.jl-fieldset {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+// Set default hr style
+.jl-hr,
+hr {
+  overflow: visible;
+  text-align: inherit;
+  border-top: 1px solid #e5e5e5;
+}
+
+.jl-checkbox,
+.jl-radio {
+  display: inline-block !important;
+  width: 16px !important;
+}
+.jl-link {
+  color: $accent-color-1;
+  &:hover,
+  &:focus,
+  &:active {
+    color: darken($accent-color-1, 0.1);
+  }
+}
+
+.jl-link-heading:hover,
+.jl-link-heading a:hover,
+.jl-link-toggle:hover .jl-link-heading,
+.jl-link-toggle:focus .jl-link-heading,
+.jl-notification-message-primary,
+.jl-button-link,
+.jl-nav-default > li > a:hover,
+.jl-nav-default > li > a:focus,
+.jl-nav-default > li.jl-active > a,
+.jl-nav-default .jl-nav-sub a:hover,
+.jl-nav-default .jl-nav-sub a:focus,
+.jl-nav-default .jl-nav-sub li.jl-active > a,
+.jl-nav-primary > li > a:hover,
+.jl-nav-primary > li > a:focus,
+.jl-nav-primary > li.jl-active > a,
+.jl-nav-primary .jl-nav-sub a:hover,
+.jl-nav-primary .jl-nav-sub a:focus,
+.jl-nav-primary .jl-nav-sub li.jl-active > a,
+.jl-navbar-nav > li.jl-active > a,
+.jl-navbar-nav > li > a:active,
+.jl-navbar-nav > li:hover > a,
+.jl-navbar-nav > li > a.jl-open,
+.jl-navbar-nav > li > a:focus,
+.jl-navbar-toggle.jl-open,
+.jl-navbar-toggle:focus,
+.jl-navbar-toggle:hover,
+.jl-navbar-dropdown-nav > li > a:focus,
+.jl-navbar-dropdown-nav > li > a:hover,
+.jl-navbar-dropdown-nav > li.jl-active > a,
+.jl-navbar-dropdown-nav .jl-nav-sub a:focus,
+.jl-navbar-dropdown-nav .jl-nav-sub a:hover,
+.jl-navbar-dropdown-nav .jl-nav-sub li.jl-active > a {
+  color: $accent-color-1;
+}
+
+.jl-list-primary > ::before {
+  color: $accent-color-1 !important;
+}
+.jl-search-input {
+  box-sizing: border-box !important;
+}
+
+.jl-tab > .jl-active > a {
+  border-color: $accent-color-1;
+}
+
+.jl-button-primary,
+.jl-card-primary.jl-card-hover:hover,
+.jl-background-primary,
+.jl-marker,
+.jl-alert-primary,
+.jl-subnav-pill > .jl-active > a,
+.jl-checkbox:checked,
+.jl-checkbox:indeterminate,
+.jl-radio:checked,
+.jl-card-primary > .tm-timeline-arrow,
+.jl-dotnav > .jl-active > *,
+.jl-dotnav > * > :focus,
+.jl-dotnav > * > :hover,
+.jl-pagination > .jl-active > * {
+  background-color: $accent-color-1;
+}
+
+.jl-button-primary:hover,
+.jl-button-primary:focus {
+  background-color: darken($accent-color-1, 0.1);
+}
+
+.jl-section-primary,
+.jl-tile-primary,
+.jl-card-primary,
+.jl-badge {
+  background: $accent-color-1;
+}
+
+.jl-text-primary,
+.jl-text-background {
+  color: $accent-color-1 !important;
+}
+
+@supports (-webkit-background-clip: text) {
+  .jl-text-background {
+    background-color: $accent-color-1;
+  }
+}
+
+.jl-overlay-primary {
+  background: fade-out($accent-color-1, 0.2);
+}
+
+.jl-accordion-title:hover,
+.jl-accordion-title:focus {
+  color: $accent-color-1;
+}
+.jl-button-default {
+  background-color: rgba(255, 255, 255, 0);
+  color: $accent-color-1;
+  border-color: $accent-color-1;
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: $accent-color-1;
+    border-color: $accent-color-1;
+    color: #ffffff;
+  }
+}
+
+.jl-pagination > * > :hover {
+  color: #fff;
+  background-color: darken($accent-color-1, 0.1);
+}
+
+.jl-popup-login {
+  .jl-list {
+    width: 300px;
+    margin: 0 auto;
+  }
+  li {
+    display: inline-block;
+  }
+}
+
+.jl-navbar-nav > li > a i {
+  vertical-align: middle;
+  margin-right: 0.2rem;
+}

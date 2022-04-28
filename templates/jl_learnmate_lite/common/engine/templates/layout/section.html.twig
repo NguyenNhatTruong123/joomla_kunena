@@ -1,0 +1,56 @@
+{% set tag_type = segment.subtype|default('section') %}
+{% set attr_id = segment.attributes.id ?: 'g-' ~ segment.id %}
+{% set attr_class = segment.attributes.class
+    ~ (segment.attributes.variations ? ' ' ~ segment.attributes.variations|join(' ')) %}
+{% set attr_extra = segment.attributes.extra|attribute_array %}
+{% set boxed = segment.attributes.boxed %}
+{% if boxed is not null %}
+    {% set boxed = boxed|trim == '' ? gantry.config.page.body.layout.sections : boxed %}
+{% endif %}
+
+{% set maxwidth = segment.attributes.maxwidth %}
+{% if maxwidth is not null %}
+    {% set maxwidth = maxwidth|trim == '' ? gantry.config.page.body.layout.maxwidth : maxwidth %}
+{% endif %}
+
+{%- set html %}
+    {% if segment.children %}
+        {% for segment in segments %}
+            {% include '@nucleus/layout/' ~ segment.type ~ '.html.twig' with { 'segments':segment.children } %}
+        {% endfor %}
+    {% endif %}
+{% endset %}
+
+{%- if segment.attributes.sticky or html|trim %}
+
+    {%- if maxwidth == 0 %}
+        {% set container_class = '' %}
+    {% elseif maxwidth == 1 %}
+        {% set container_class = ' jl-container-small' %}
+    {% elseif maxwidth == 2 %}
+        {% set container_class = ' jl-container-large' %}
+    {% elseif maxwidth == 3 %}
+        {% set container_class = ' jl-container-xlarge' %} 
+    {% elseif maxwidth == 4 %}
+        {% set container_class = ' jl-container-expand' %}                       
+    {% endif %}
+
+    {%- if boxed is not null and boxed == 0 %}
+        {% set html %}
+        <div class="jl-container{{ container_class }}">{{ html|raw }}</div>
+        {% endset %}
+    {% endif %}
+
+    {% set html %}
+    {% set attr_class = attr_class ? ' class="' ~ attr_class|trim ~ '"' -%}
+    <{{ tag_type }} id="{{ attr_id }}"{{ attr_class|raw }} {{- attr_extra|raw }}>
+        {{ html|raw }}
+    </{{ tag_type }}>
+    {%- endset %}
+
+    {%- if boxed == 1 %}
+    <div class="jl-container{{ container_class }}">{{ html|raw }}</div>
+    {% else %}
+    {{ html|raw }}
+    {% endif %}
+{% endif %}

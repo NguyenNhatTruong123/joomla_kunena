@@ -1,0 +1,29 @@
+enabled: '1'
+css:
+  class: 'jl-text-right@m jl-text-left'
+display: both
+items:
+  -
+    icon: 'fab fa-facebook'
+    text: Facebook
+    title: ''
+    link: 'https://www.facebook.com/nhattruong1611320/'
+    name: Facebook
+  -
+    icon: 'fab fa-twitter'
+    text: Twitter
+    title: ''
+    link: 'http://www.twitter.com/joomlead'
+    name: Twitter
+  -
+    icon: 'fab fa-github'
+    text: Github
+    title: ''
+    link: 'https://github.com/NguyenNhatTruong123'
+    name: GitHub
+  -
+    icon: 'fab fa-instagram'
+    text: Instagram
+    title: ''
+    link: '#'
+    name: Instagram

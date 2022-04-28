@@ -1,0 +1,172 @@
+version: 2
+preset:
+  image: 'gantry-admin://images/layouts/default.png'
+  name: _offline
+  timestamp: 1650508408
+layout:
+  top: {  }
+  navigation: {  }
+  /slideshow/: {  }
+  hero: {  }
+  /header/: {  }
+  /above/: {  }
+  /feature/: {  }
+  /showcase/: {  }
+  /utility/: {  }
+  /container-main/:
+    -
+      -
+        'sidebar 25': {  }
+      -
+        'mainbar 50':
+          -
+            - system-messages-8907
+          -
+            - system-content-2965
+      -
+        'aside 25': {  }
+  /expanded/: {  }
+  /extension/: {  }
+  /bottom/: {  }
+  /below/: {  }
+  footer: {  }
+  copyright: {  }
+  offcanvas: {  }
+structure:
+  top:
+    type: section
+    inherit:
+      outline: default
+      include:
+        - attributes
+        - block
+        - children
+  navigation:
+    type: section
+    inherit:
+      outline: default
+      include:
+        - attributes
+        - block
+        - children
+  slideshow:
+    type: section
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  hero:
+    type: section
+    inherit:
+      outline: default
+      include:
+        - children
+        - attributes
+  header:
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  above:
+    type: section
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  feature:
+    type: section
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  showcase:
+    type: section
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  utility:
+    type: section
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  sidebar:
+    type: section
+    subtype: aside
+    attributes:
+      class: ''
+      variations: ''
+  mainbar:
+    type: section
+    subtype: main
+    title: Main
+    attributes:
+      class: ''
+      variations: ''
+  aside:
+    attributes:
+      class: ''
+      variations: ''
+  container-main:
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: jl-section
+      extra: {  }
+  expanded:
+    type: section
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  extension:
+    type: section
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  bottom:
+    type: section
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  below:
+    type: section
+    attributes:
+      boxed: ''
+      maxwidth: ''
+      class: ''
+      variations: ''
+  footer:
+    inherit:
+      outline: default
+      include:
+        - attributes
+        - block
+        - children
+  copyright:
+    type: section
+    inherit:
+      outline: default
+      include:
+        - attributes
+        - block
+        - children
+  offcanvas:
+    inherit:
+      outline: default
+      include:
+        - attributes
+        - block
+        - children

@@ -1,0 +1,6 @@
+.jl-logo {
+    font-weight: $font-weight-bold;
+    @include responsive-font($responsive-font-size, $core-font-size, false, false);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}

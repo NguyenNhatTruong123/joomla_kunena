@@ -1,0 +1,22 @@
+{% extends '@nucleus/partials/particle.html.twig' %}
+
+{% block particle %}
+{% assets in 'head' with { priority: 11 } %}
+{% if particle.enabled %}
+{% if gantry.page.direction == 'rtl' %}
+<link href="{{ url('gantry-theme://css/jluikit-rtl.min.css') }}" rel="stylesheet">
+{% else %}
+<link href="{{ url('gantry-theme://css/jluikit.min.css') }}" rel="stylesheet">
+{% endif %}
+{% endif %}
+{% endassets -%}
+
+{% assets in 'head' with { priority: 10 } %}
+{% if particle.enabled %}
+<script src="{{ url('gantry-theme://js/jluikit.min.js') }}"></script>
+{% if particle.uikit_icon == 'enabled' %}
+<script src="{{ url('gantry-theme://js/jluikit-icons.min.js') }}"></script>
+{% endif %}
+{% endif %}
+{% endassets -%}
+{% endblock %}
