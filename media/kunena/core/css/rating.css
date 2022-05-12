@@ -4,10 +4,11 @@
 
 ----------------------------------------------------------------------------- */
 #krating {
-	display: inline-block;
-	left: 4px;
+	display: flex;
+	/* left: 4px; */
 	position: relative;
-	top: 4px;
+	/* top: 4px; */
+	align-items: flex-start;
 }
 
 #kunena.layout h1 {
@@ -75,13 +76,11 @@
 .star-wrapper {
 	top: 50%;
 	left: 50%;
-	/* transform: translate(-35%, -15%); */
-  	/* position: absolute; */
-	/* width: 800px; */
+	display: flex;
 
   }
   .s1,.s2,.s3,.s4,.s5,.star-wrapper a {
-	font-size: 2em;
+	font-size: 1.2em;
 	color: grey;
 	text-decoration: none;
 	transition: all 0.2s;
@@ -95,8 +94,29 @@
   
 
   .s1.is-active, .s2.is-active, .s3.is-active, .s4.is-active, .s5.is-active {
+	  /* --percent : cal(var(--rating) * 100%);
+	  background-image: linear-gradient(90deg, gold var(--percent), grey 2px); */
 	  color: gold;
   }
+
+
+
+  .s1.decimal, .s2.decimal, .s3.decimal, .s4.decimal, .s5.decimal{
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+	/* text-fill-color: transparent; */
+	--percent : calc(var(--rating) * 100%);
+	background-image: linear-gradient(90deg, gold var(--percent), grey 2px);
+  }
+
+  /* .s1.decimal::after, .s2.decimal::after, .s3.decimal::after, .s4.decimal::after, .s5.decimal::after {
+	content: "\f006";
+	position: absolute;
+	top: 0;
+	left: 0;
+	color: gold;
+	} */
 
   .s1.is-hover, .s2.is-hover, .s3.is-hover, .s4.is-hover, .s5.is-hover {
 	  color: orange;

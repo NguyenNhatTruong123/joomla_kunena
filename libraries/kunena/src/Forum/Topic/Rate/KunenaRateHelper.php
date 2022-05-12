@@ -87,7 +87,7 @@ abstract class KunenaRateHelper
 			->where($db->quoteName('topic_id') . ' = ' . $db->quote($id));
 		$db->setQuery($query);
 
-		return round($db->loadResult());
+		return !$db->loadResult() ? 0: $db->loadResult();
 	}
 
 	/**
@@ -108,7 +108,7 @@ abstract class KunenaRateHelper
 			->where($db->quoteName('topic_id') . ' = ' . $db->quote($id));
 		$db->setQuery($query);
 
-		return round($db->loadResult());
+		return !$db->loadResult() ? 0: $db->loadResult();
 	}
 
 	/**
@@ -129,8 +129,8 @@ abstract class KunenaRateHelper
 			->from($db->quoteName('#__kunena_rate'))
 			->where($db->quoteName('topic_id') . ' = ' . $db->quote($id))
 			->andWhere($db->quoteName('userid') . ' = ' . $db->quote($userid));
-		$db->setQuery($query);	
+		$db->setQuery($query);
 
-		return round($db->loadResult());
+		return !$db->loadResult() ? 0: $db->loadResult();
 	}
 }

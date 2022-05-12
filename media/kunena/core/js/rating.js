@@ -12,7 +12,7 @@
 	 * @param {Function} callback The optional callback to run after set rating
 	 * @return {Object} Some public methods
 	 */
-	function rating(el, currentRating, maxRating, userid, callback)
+	function rating(el, currentRating, maxRating, callback)
 	{
 
 		/**
@@ -45,17 +45,23 @@
 			if (currentRating < 0 || currentRating > maxRating) {
 				throw Error('Current rating is out of bounds.');
 			}
+
+			let decimal = currentRating - Math.floor(currentRating);
+			// let decimal = 0.7;
 			for (let i = 0; i < maxRating; i++) {
 				const star = document.createElement('a');
-				// star.classList.add('c-rating__item');
-				star.href = "#";
 				star.classList.add('fas');
 				star.classList.add('fa-star');
 				star.classList.add('s' + (i + 1));
 				star.setAttribute('data-index', i);
-				// alert("Start rating");
-				if (i < currentRating) {
+				
+				if ( i < Math.floor(currentRating)){
 					star.classList.add('is-active');
+				} else {
+					if (i == Math.floor(currentRating) && i != 0 && decimal != 0){
+						star.classList.add('decimal');
+						star.style = "--rating: " + decimal;
+					}
 				}
 
 				el.appendChild(star);
@@ -63,19 +69,6 @@
 				attachStarEvents(star);
 			}
 
-			
-			var content = "";
-			el.appendChild(document.createElement('br'));
-			var div = document.createElement('div');
-			div.style = "text-align:center";
-            if (userid != "0"){
-                content = document.createTextNode("Your rate");
-            } else {
-                content = document.createTextNode("Average rate");
-            }
-			div.appendChild(content);
-            el.appendChild(div);
-			
 		})();
 
 		/**
@@ -121,10 +114,12 @@
 					if (index <= parseInt(star.getAttribute('data-index'))) {
 						item.classList.add('is-hover');
 						item.classList.remove('is-active');
+						item.classList.remove('decimal');
 					}
 					else {
 						item.classList.remove('is-hover');
 						item.classList.remove('is-active');
+						item.classList.remove('decimal');
 					}
                     }
 				);
@@ -184,14 +179,18 @@
 			}
 
 			currentRating = value || currentRating;
-
 			iterate(stars, function (star, index) {
-				if (index < currentRating) {
+				let decimal = currentRating - Math.floor(currentRating);
+				if (index < Math.floor(currentRating)) {
 					star.classList.remove('is-hover');
 					star.classList.add('is-active');
 				}
 				else {
 					star.classList.remove('is-hover');
+					if ( index == Math.floor(currentRating) && index != 0 && decimal != 0){
+						star.classList.add('decimal');
+						star.style = "--rating: " + decimal;
+					}
 					star.classList.remove('is-active');
 				}
                 }

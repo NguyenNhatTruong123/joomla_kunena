@@ -2062,12 +2062,6 @@ class KunenaTopic extends KunenaDatabaseObject
 		return KunenaRateHelper::getCount($this->id);
 	}
 
-	public function loadUserRate(): int 
-	{
-		$user = KunenaUserHelper::getMyself();
-		return KunenaRateHelper::getRate($this->id, $user->userid);
-	}
-
 	/**
 	 * @param   KunenaUser  $user  user
 	 *

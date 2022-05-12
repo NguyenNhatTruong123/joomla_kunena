@@ -20,7 +20,7 @@ use Joomla\CMS\WebAsset\WebAssetManager;
 	<ol itemscope itemtype="https://schema.org/BreadcrumbList" class="mod-breadcrumbs breadcrumb px-3 py-2">
 		<?php if ($params->get('showHere', 1)) : ?>
 			<li class="mod-breadcrumbs__here float-start">
-				<?php //echo Text::_('MOD_BREADCRUMBS_HERE'); ?>&#160;
+				<?php echo Text::_('MOD_BREADCRUMBS_HERE'); ?>&#160;
 			</li>
 		<?php else : ?>
 			<li class="mod-breadcrumbs__divider float-start">
