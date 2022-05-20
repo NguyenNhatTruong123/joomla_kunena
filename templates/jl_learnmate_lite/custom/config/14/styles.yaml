@@ -1,9 +1,0 @@
-preset: preset4
-accent:
-  color-1: '#0369a1'
-navigation:
-  background: '#0369a1'
-copyright:
-  link-hover-color: '#0369a1'
-offcanvas:
-  text-color-active: '#0369a1'

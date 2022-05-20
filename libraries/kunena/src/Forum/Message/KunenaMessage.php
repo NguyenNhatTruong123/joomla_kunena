@@ -458,13 +458,8 @@ class KunenaMessage extends KunenaDatabaseObject
 	 * @throws  Exception
 	 * @since   Kunena 6.0
 	 */
-	public function sendNotification($url = null, $approved = false)
+	public function sendNotification($url = null, $approved = false): bool
 	{
-		if ($this->hold > 1)
-		{
-			return false;
-		}
-
 		$config = KunenaFactory::getConfig();
 
 		if (!$config->get('sendEmails'))
@@ -472,23 +467,8 @@ class KunenaMessage extends KunenaDatabaseObject
 			return false;
 		}
 
-		$this->urlNotification = $url;
-
-		// Factory::getApplication()->RegisterEvent( 'onBeforeRespond', array($this, 'notificationCloseConnection') );
-		Factory::getApplication()->RegisterEvent('onAfterRespond', [$this, 'notificationPost']);
-	}
-
-	/**
-	 * @return  boolean
-	 *
-	 * @throws  Exception
-	 * @since   Kunena 6.0
-	 */
-	public function notificationPost(): bool
-	{
 		// Restore app input context
 		Factory::getApplication()->input->set('message', $this);
-		$config = KunenaFactory::getConfig();
 
 		$url = $this->urlNotification;
 
@@ -615,9 +595,10 @@ class KunenaMessage extends KunenaDatabaseObject
 			$mailer = new MailTemplate('com_kunena.reply', $user->getParam('language', $app->get('language')), $mail);
 			$mailer->addTemplateData(
 				[
-					'mail'       => $mail,
+					'mail'       => '',
 					'subject'    => $subject,
-					'message'    => $this,
+					'name'       => $this->name,
+					'message'    => $this->message,
 					'messageUrl' => $url,
 					'once'       => $once,
 				]
@@ -632,9 +613,10 @@ class KunenaMessage extends KunenaDatabaseObject
 			$mailer = new MailTemplate('com_kunena.replymoderator', $user->getParam('language', $app->get('language')), $mail);
 			$mailer->addTemplateData(
 				[
-					'mail'       => $mail,
+					'mail'       => '',
 					'subject'    => $subject,
-					'message'    => $this,
+					'name'       => $this->name,
+					'message'    => $this->message,
 					'messageUrl' => $url,
 					'once'       => $once,
 				]
@@ -697,13 +679,13 @@ class KunenaMessage extends KunenaDatabaseObject
 	 * @param   null|KunenaCategory  $category  Fake category if needed. Used for aliases.
 	 * @param   bool                 $xhtml     xhtml
 	 *
-	 * @return  boolean
+	 * @return  string
 	 *
 	 * @throws  null
 	 * @throws  Exception
 	 * @since   Kunena 6.0
 	 */
-	public function getPermaUrl($category = null, $xhtml = true): bool
+	public function getPermaUrl($category = null, $xhtml = true): string
 	{
 		$uri = $this->getPermaUri($category);
 

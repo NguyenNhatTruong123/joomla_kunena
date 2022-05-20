@@ -1,17 +1,17 @@
 <?php
 return [
     '@class' => 'Gantry\\Component\\Config\\CompiledConfig',
-    'timestamp' => 1650614057,
-    'checksum' => 'c8e0b28cf2f8a301d004c89f226e77d1',
+    'timestamp' => 1653022216,
+    'checksum' => 'ca39610afd2c215cf3645a7f8778d9e0',
     'files' => [
         'templates/jl_learnmate_lite/custom/config/15' => [
             'index' => [
                 'file' => 'templates/jl_learnmate_lite/custom/config/15/index.yaml',
-                'modified' => 1650511344
+                'modified' => 1653022216
             ],
             'layout' => [
                 'file' => 'templates/jl_learnmate_lite/custom/config/15/layout.yaml',
-                'modified' => 1650511344
+                'modified' => 1653022216
             ]
         ],
         'templates/jl_learnmate_lite/custom/config/default' => [
@@ -1647,8 +1647,8 @@ return [
             'preset' => 'preset1'
         ],
         'index' => [
-            'name' => 15,
-            'timestamp' => 1650511344,
+            'name' => '15',
+            'timestamp' => 1653022216,
             'version' => 7,
             'preset' => [
                 'image' => 'gantry-admin://images/layouts/default.png',
@@ -1681,19 +1681,19 @@ return [
             ],
             'particles' => [
                 'position' => [
-                    'position-position-7040' => 'Top A'
+                    'position-position-2613' => 'Top A'
                 ],
                 'jlnavbar' => [
-                    'jlnavbar-9051' => 'JL Navbar'
+                    'jlnavbar-3795' => 'JL Navbar'
                 ],
                 'jlfooterinfo' => [
-                    'jlfooterinfo-6394' => 'JL Footer Info'
+                    'jlfooterinfo-4957' => 'JL Footer Info'
                 ],
                 'social' => [
-                    'social-2140' => 'Social'
+                    'social-5956' => 'Social'
                 ],
                 'copyright' => [
-                    'copyright-1752' => 'Copyright'
+                    'copyright-1508' => 'Copyright'
                 ]
             ],
             'inherit' => [
@@ -1703,11 +1703,11 @@ return [
                     'footer' => 'footer',
                     'copyright' => 'copyright',
                     'offcanvas' => 'offcanvas',
-                    'position-position-7040' => 'position-position-9039',
-                    'jlnavbar-9051' => 'jlnavbar-2718',
-                    'jlfooterinfo-6394' => 'jlfooterinfo-6138',
-                    'social-2140' => 'social-3367',
-                    'copyright-1752' => 'copyright-6042'
+                    'position-position-2613' => 'position-position-9039',
+                    'jlnavbar-3795' => 'jlnavbar-2718',
+                    'jlfooterinfo-4957' => 'jlfooterinfo-6138',
+                    'social-5956' => 'social-3367',
+                    'copyright-1508' => 'copyright-6042'
                 ]
             ]
         ],

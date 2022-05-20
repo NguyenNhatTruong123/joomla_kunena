@@ -45,12 +45,17 @@
                     data: 'starid=' + rating + '&topic_id=' + topicid
                 }
             ).done(function (response) {
+                    debugger;
                     if (response.success) {
-                        $('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>' + Joomla.Text._('COM_KUNENA_RATING_SUCCESS_LABEL') + '</h4>' + Joomla.Text._(response.message) + '</div>').appendTo('#system-message-container');
+                        // $('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>' + Joomla.Text._('COM_KUNENA_RATING_SUCCESS_LABEL') + '</h4>' + Joomla.Text._(response.message) + '</div>').appendTo('#system-message-container');
+                        $('<joomla-alert type="success" close-text="Close" dismiss="true" role="alert" style="animation-name: joomla-alert-fade-in;"><button type="button" class="joomla-alert--close" aria-label="Close"><span aria-hidden="true">×</span></button><div class="alert-heading"><span class="success"></span><span class="visually-hidden">info</span></div><div class="alert-wrapper"><div class="alert-message">' + Joomla.Text._(response.message) + '.</div></div></joomla-alert>').appendTo('#system-message-container');
+
                     } else {
-                        $('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>' + Joomla.Text._('COM_KUNENA_RATING_WARNING_LABEL') + '</h4>' + Joomla.Text._(response.message) + '</div>').appendTo('#system-message-container');
-                    }
+                        // $('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>' + Joomla.Text._('COM_KUNENA_RATING_WARNING_LABEL') + '</h4>' + Joomla.Text._(response.message) + '</div>').appendTo('#system-message-container');
+
+                        $('<joomla-alert type="danger" close-text="Close" dismiss="true" role="alert" style="animation-name: joomla-alert-fade-in;"><button type="button" class="joomla-alert--close" aria-label="Close"><span aria-hidden="true">×</span></button><div class="alert-heading"><span class="danger"></span><span class="visually-hidden">info</span></div><div class="alert-wrapper"><div class="alert-message">' + Joomla.Text._(response.message) + '.</div></div></joomla-alert>').appendTo('#system-message-container');
                 }
+            }
             ).fail(function (reponse) {
                     $('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>' + Joomla.Text._('COM_KUNENA_RATING_WARNING_LABEL') + '</h4>' + reponse + '</div>').appendTo('#system-message-container');
                 }
@@ -66,33 +71,6 @@
         ratingItem.classList.add('star-wrapper');
         krating.appendChild(ratingItem);
         return ratingItem;
-    }
-
-    // Add krating widget
-    function addRatingWidget(ratingItem, rate, topicid, userid) {
-        // alert("rating");
-        const ratingElement = ratingItem.querySelector('.c-rating');
-        const currentRating = rate;
-        const maxRating = 5;
-        const callback = function (rating) {
-            $.ajax({
-                    dataType: "json",
-                    url: $('#krating_submit_url').val(),
-                    data: 'starid=' + rating + '&topic_id=' + topicid
-                }
-            ).done(function (response) {
-                    if (response.success) {
-                        $('<div class="alert alert-success"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>' + Joomla.Text._('COM_KUNENA_RATING_SUCCESS_LABEL') + '</h4>' + Joomla.Text._(response.message) + '</div>').appendTo('#system-message-container');
-                    } else {
-                        $('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>' + Joomla.Text._('COM_KUNENA_RATING_WARNING_LABEL') + '</h4>' + Joomla.Text._(response.message) + '</div>').appendTo('#system-message-container');
-                    }
-                }
-            ).fail(function (reponse) {
-                    $('<div class="alert alert-error"><button type="button" class="close" data-dismiss="alert">&times;</button><h4>' + Joomla.Text._('COM_KUNENA_RATING_WARNING_LABEL') + '</h4>' + reponse + '</div>').appendTo('#system-message-container');
-                }
-            );
-        };
-        const r = rating(ratingElement, currentRating, maxRating, userid, callback);
     }
 }
 );

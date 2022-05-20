@@ -2,7 +2,7 @@
 /**
  * Kunena Component
  *
- * @package         Kunena.Administrator.Template
+ * @package         Kunena.Administrator.Config
  * @subpackage      Configuration
  *
  * @copyright       Copyright (C) 2008 - 2022 Kunena Team. All rights reserved.
@@ -39,6 +39,6 @@ use Kunena\Forum\Libraries\Route\KunenaRoute;
 			</div>
 		</div>
 	</div>
-	<input type="hidden" name="task" value="setDefault"/>
+	<input type="hidden" name="task" value="config.setDefault"/>
 	<?php echo HTMLHelper::_('form.token') ?>
 </form>

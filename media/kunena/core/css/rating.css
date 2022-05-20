@@ -1,7 +1,5 @@
 /* -----------------------------------------------------------------------------
-
   COMPENENTS - RATING
-
 ----------------------------------------------------------------------------- */
 #krating {
 	display: flex;
@@ -80,7 +78,7 @@
 
   }
   .s1,.s2,.s3,.s4,.s5,.star-wrapper a {
-	font-size: 1.2em;
+	font-size: 1.5em;
 	color: grey;
 	text-decoration: none;
 	transition: all 0.2s;

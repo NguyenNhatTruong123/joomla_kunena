@@ -18,7 +18,6 @@ use Exception;
 use Joomla\CMS\Filesystem\File;
 use Joomla\CMS\Filesystem\Folder;
 use Joomla\CMS\Language\Text;
-use Joomla\CMS\MVC\Controller\BaseController;
 use Joomla\CMS\MVC\Controller\FormController;
 use Joomla\CMS\MVC\Factory\MVCFactoryInterface;
 use Joomla\CMS\Session\Session;
@@ -69,6 +68,7 @@ class TemplateController extends FormController
 		parent::__construct($config, $factory, $app, $input);
 
 		$this->baseurl = 'administrator/index.php?option=com_kunena&view=templates';
+		$this->baseurlTemplate = 'administrator/index.php?option=com_kunena&view=template';
 		$this->config  = KunenaFactory::getConfig();
 	}
 
@@ -696,7 +696,7 @@ class TemplateController extends FormController
 			return;
 		}
 
-		$this->setRedirect(KunenaRoute::_($this->baseurl . "&layout=addnew", false));
+		$this->setRedirect(KunenaRoute::_($this->baseurlTemplate . '&layout=addnew', false));
 	}
 
 	/**
@@ -789,6 +789,8 @@ class TemplateController extends FormController
 		// Delete the template directory
 		if (is_dir($tpl))
 		{
+			$retval = Folder::delete($tpl);
+
 			// Clear all cache, just in case.
 			KunenaCacheHelper::clearAll();
 			$this->app->enqueueMessage(Text::sprintf('COM_KUNENA_A_TEMPLATE_MANAGER_UNINSTALL_SUCCESS', $id));

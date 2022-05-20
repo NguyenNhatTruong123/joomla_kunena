@@ -26,10 +26,10 @@ use Kunena\Forum\Libraries\Forum\KunenaForum;
 class plgKunenaComprofiler extends CMSPlugin
 {
 	/**
-	 * @var     string  CB version 2.7.0 works with Php 8.1 and with Joomla! 4.0/4.1
+	 * @var     string  CB version 2.7.2 works with Php 8.1 and with Joomla! 4.0/4.1
 	 * @since   Kunena 6.0
 	 */
-	public $minCBVersion = '2.7.0';
+	public $minCBVersion = '2.7.2';
 
 	/**
 	 * plgKunenaComprofiler constructor.
@@ -86,7 +86,6 @@ class plgKunenaComprofiler extends CMSPlugin
 	 *
 	 * @throws Exception
 	 * @since   Kunena 6.0
-	 *
 	 */
 	public function onKunenaDisplay(string $type, $view = null, $params = null): void
 	{
@@ -117,7 +116,6 @@ class plgKunenaComprofiler extends CMSPlugin
 	 *
 	 * @throws Exception
 	 * @since   Kunena 6.0
-	 *
 	 */
 	public function onKunenaPrepare(string $context, &$item, object $params, $page = 0): void
 	{

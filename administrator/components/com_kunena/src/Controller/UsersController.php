@@ -795,7 +795,7 @@ class UsersController extends KunenaController
 	 * @throws  null
 	 * @since   Kunena 2.0
 	 */
-	public function batchModerators(): void
+	public function batchmoderators(): void
 	{
 		if (!Session::checkToken())
 		{
@@ -843,7 +843,7 @@ class UsersController extends KunenaController
 			// Global moderator is a special case
 			if ($this->me->isAdmin() && \in_array(0, $catids))
 			{
-				KunenaAccess::getInstance()->setModerator((object) [], $user, true);
+				KunenaAccess::getInstance()->setModerator(0, $user, true);
 			}
 		}
 

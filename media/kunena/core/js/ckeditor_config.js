@@ -30,6 +30,8 @@ CKEDITOR.editorConfig = function( config ) {
 
 	var remove_buttons_url_image = Joomla.getOptions('com_kunena.ckeditor_remove_buttons_url_image');
 
+	config.toolbar_Simple
+
 	if(Joomla.getOptions('com_kunena.ckeditor_buttons_configuration') !== undefined && remove_buttons_url_image===undefined)
 	{
 		config.removeButtons = 'Anchor,Paste,Styles,Format,Font,BGColor,Copy,Outdent,Indent,' + Joomla.getOptions('com_kunena.ckeditor_buttons_configuration');
@@ -47,6 +49,7 @@ CKEDITOR.editorConfig = function( config ) {
 	}
 
 	config.extraPlugins = 'ebay,twitter,instagram,map,soundcloud,video,confidential,hidetext,spoiler,code,polls';
+	// config.extraPlugins = 'code'
 	var emoticons = Joomla.getOptions('com_kunena.ckeditor_emoticons');
 	var obj = jQuery.parseJSON( emoticons );
 	var list_emoticons = [];

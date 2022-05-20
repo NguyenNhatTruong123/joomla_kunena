@@ -35,7 +35,7 @@ class Pkg_KunenaInstallerScript extends InstallerScript
 	 * @var    string
 	 * @since  6.0.0
 	 */
-	protected $minimumJoomla = '4.0.6';
+	protected $minimumJoomla = '4.1.3';
 
 	/**
 	 * List of supported versions. Newest version first!
@@ -56,9 +56,9 @@ class Pkg_KunenaInstallerScript extends InstallerScript
 			'0'   => '5.7.8', // Preferred version
 		],
 		'Joomla!' => [
-			'4.1' => '4.1.2',
-			'4.0' => '4.0.6',
-			'0'   => '4.1.2', // Preferred version
+			'4.1' => '4.1.3',
+			'4.2' => '4.2.0-alpha2',
+			'0'   => '4.1.3', // Preferred version
 		],
 	];
 
@@ -303,7 +303,6 @@ class Pkg_KunenaInstallerScript extends InstallerScript
 			return false;
 		}
 
-
 		return true;
 	}
 
@@ -399,6 +398,7 @@ class Pkg_KunenaInstallerScript extends InstallerScript
 
 		$db->setQuery("SHOW TABLES LIKE {$db->quote($table)}");
 		$upgrade = 0;
+		$installed = 'NONE';
 
 		if ($db->loadResult() == $table)
 		{
@@ -413,44 +413,46 @@ class Pkg_KunenaInstallerScript extends InstallerScript
 					$db->setQuery($query);
 
 					$db->execute();
-
-					$upgrade = 1;
 				}
+
+				$upgrade = 1;
 			}
 		}
 
-		if (strtolower($type) == 'install' || strtolower($type) == 'discover_install')
+		$file = JPATH_MANIFESTS . '/packages/pkg_kunena.xml';
+
+		$manifest    = simplexml_load_file($file);
+		$version     = (string) $manifest->version;
+		$build       = (string) $manifest->version;
+		$date        = (string) $manifest->creationDate;
+		$versionname = (string) $manifest->versionname;
+		$installdate = Factory::getDate('now');
+		$state       = '';
+		$sampleData  = 0;
+
+		if ($upgrade == 1)
 		{
-			$file = JPATH_MANIFESTS . '/packages/pkg_kunena.xml';
+			$sampleData = 1;
+		}
 
-			$manifest    = simplexml_load_file($file);
-			$version     = (string) $manifest->version;
-			$build       = (string) $manifest->version;
-			$date        = (string) $manifest->creationDate;
-			$versionname = (string) $manifest->versionname;
-			$installdate = Factory::getDate('now');
-			$state       = '';
-			$sampleData  = 0;
+		if ($installed != 'NONE')
+		{
+			$state = $installed;
+		}
 
-			if ($upgrade == 1)
-			{
-				$state = $installed;
-				$sampleData = 1;
-			}
+		$query = $db->getQuery(true);
 
-			$query = $db->getQuery(true);
+		$values = [
+			$db->quote($version),
+			$db->quote($build),
+			$db->quote($date),
+			$db->quote($versionname),
+			$db->quote($sampleData),
+			$db->quote($installdate),
+			$db->quote($state),
+		];
 
-			$values = [
-				$db->quote($version),
-				$db->quote($build),
-				$db->quote($date),
-				$db->quote($versionname),
-				$db->quote($sampleData),
-				$db->quote($installdate),
-				$db->quote($state),
-			];
-
-			$query->insert($db->quoteName('#__kunena_version'))
+		$query->insert($db->quoteName('#__kunena_version'))
 			->columns(
 				[
 					$db->quoteName('version'),
@@ -462,11 +464,10 @@ class Pkg_KunenaInstallerScript extends InstallerScript
 					$db->quoteName('state'),
 				]
 			)
-				->values(implode(', ', $values));
-				$db->setQuery($query);
+			->values(implode(', ', $values));
+		$db->setQuery($query);
 
-				$db->execute();
-		}
+		$db->execute();
 
 		$version = '';
 		$date    = '';
@@ -632,7 +633,7 @@ class Pkg_KunenaInstallerScript extends InstallerScript
 				$db->quote('com_kunena'),
 				$db->quote(''),
 				$db->quote(Text::_('COM_KUNENA_SENDMAIL_REPORT_SUBJECT')),
-				$db->quote(Text::_('COM_KUNENA_SENDMAIL_BODY')),
+				$db->quote(Text::_('COM_KUNENA_SENDMAIL_BODY_REPORTMODERATOR')),
 				$db->quote(''),
 				$db->quote(''),
 				$db->quote('{"tags":["mail", "subject", "message", "messageUrl", "once"]}'),
@@ -640,7 +641,7 @@ class Pkg_KunenaInstallerScript extends InstallerScript
 
 			$query->insert($db->quoteName('#__mail_templates'))
 				->columns(
-				[
+					[
 					$db->quoteName('template_id'),
 					$db->quoteName('extension'),
 					$db->quoteName('language'),
@@ -649,11 +650,11 @@ class Pkg_KunenaInstallerScript extends InstallerScript
 					$db->quoteName('htmlbody'),
 					$db->quoteName('attachments'),
 					$db->quoteName('params'),
-				]
+					]
 				)
-					->values(implode(', ', $values))
-					->values(implode(', ', $values2))
-					->values(implode(', ', $values3));
+				->values(implode(', ', $values))
+				->values(implode(', ', $values2))
+				->values(implode(', ', $values3));
 				$db->setQuery($query);
 
 				$db->execute();

@@ -34,7 +34,6 @@ use Kunena\Forum\Libraries\Response\KunenaResponseJson;
 use Kunena\Forum\Libraries\Route\KunenaRoute;
 use Kunena\Forum\Libraries\User\KunenaUser;
 use Kunena\Forum\Libraries\User\KunenaUserHelper;
-use Kunena\Forum\Libraries\Version\KunenaVersion;
 use Kunena\Forum\Libraries\View\KunenaView;
 
 /**
@@ -375,24 +374,8 @@ class KunenaController extends BaseController
 		$lName   = Factory::getApplication()->input->getWord('layout', 'default');
 		$vFormat = $document->getType();
 
-		if ($this->app->isClient('administrator'))
+		if ($this->app->isClient('site'))
 		{
-			// Load admin language files
-			KunenaFactory::loadLanguage('com_kunena.install', 'admin');
-			KunenaFactory::loadLanguage('com_kunena.views', 'admin');
-
-			// Load last to get deprecated language files to work
-			KunenaFactory::loadLanguage('com_kunena', 'admin');
-		}
-		else
-		{
-			// Load site language files
-			KunenaFactory::loadLanguage('com_kunena.views');
-			KunenaFactory::loadLanguage('com_kunena.templates');
-
-			// Load last to get deprecated language files to work
-			KunenaFactory::loadLanguage('com_kunena');
-
 			$menu   = $this->app->getMenu();
 			$active = $menu->getActive();
 

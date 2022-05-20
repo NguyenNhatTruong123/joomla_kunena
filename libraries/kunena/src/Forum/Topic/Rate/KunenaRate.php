@@ -247,6 +247,7 @@ class KunenaRate extends CMSObject
 			)
 			->values(implode(', ', $values));
 		
+		//Check và update rating cho cùng một user
 		$queryCheckExist = "SELECT * FROM #__kunena_rate WHERE topic_id = ".$topic_id." AND userid = ".$userid."";
 		fwrite($myfile, $queryCheckExist."\n");
 		$this->_db->setQuery($queryCheckExist);
